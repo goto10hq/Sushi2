@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.5</TargetFramework>
+    <AssemblyName>Sushi2</AssemblyName>
+    <RootNamespace>Sushi2</RootNamespace>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Authors>frohikey</Authors>
+    <Company>Goto10</Company>
+    <Description>Utility library for cool kids.</Description>
+    <Copyright>Copyright (c) 2017 Goto10 s.r.o.</Copyright>
+    <PackageLicenseUrl>https://github.com/goto10hq/Sushi2/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/goto10hq/Sushi2</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/goto10hq/Sushi2</RepositoryUrl>
+  </PropertyGroup>
+
+</Project>
