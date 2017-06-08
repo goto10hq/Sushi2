@@ -370,8 +370,14 @@ namespace Sushi2
                 result.Append(pos >= 0 ? simplifiedText[pos] : s[i]);
             }
 
-            return result.ToString();
+            s =  result.ToString();
 
+            var newStringBuilder = new StringBuilder();
+                newStringBuilder.Append(s.Normalize(NormalizationForm.FormKD)
+                                                .Where(x => x < 128)
+                                                .ToArray());
+
+           return newStringBuilder.ToString();                        
         }
 
         /// <summary>
