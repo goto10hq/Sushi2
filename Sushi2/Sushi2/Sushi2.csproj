@@ -12,6 +12,7 @@
     <PackageLicenseUrl>https://github.com/goto10hq/Sushi2/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/goto10hq/Sushi2</PackageProjectUrl>
     <RepositoryUrl>https://github.com/goto10hq/Sushi2</RepositoryUrl>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
