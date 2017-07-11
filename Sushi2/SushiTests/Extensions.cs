@@ -29,7 +29,7 @@ namespace SushiTests
 
         [TestMethod]
         public void ToSortedString()
-        {            
+        {
             var texts = new List<string>
                         {
                             "abrakadabra",
@@ -51,12 +51,12 @@ namespace SushiTests
                             "!",
                             "42",
                             "bříza",
-                            "breeze",                            
+                            "breeze",
                             "_"
                         };
 
             Thread.CurrentThread.CurrentCulture = Sushi2.Cultures.English;
-            var sorted = texts.Select(x => x).OrderBy(x => x.ToSortedString()).ToList();            
+            var sorted = texts.Select(x => x).OrderBy(x => x.ToSortedString()).ToList();
             Thread.CurrentThread.CurrentCulture = Sushi2.Cultures.Czech;
             var linqSorted = texts.OrderBy(x => x.ToLower()).ToList();
 
@@ -120,7 +120,7 @@ namespace SushiTests
         {
             const double x = 100.001;
             const double r = -256.33;
-            
+
             Thread.CurrentThread.CurrentCulture = Sushi2.Cultures.English;
             Assert.AreEqual(x, "100.001".ToDouble());
             Thread.CurrentThread.CurrentCulture = Sushi2.Cultures.Czech;
@@ -128,8 +128,8 @@ namespace SushiTests
             Assert.AreEqual(null, "100.001".ToDouble());
 
             Thread.CurrentThread.CurrentCulture = Sushi2.Cultures.English;
-            Assert.AreEqual(null, "foo".ToDouble());            
-            Assert.AreEqual(-256.33, r.ToDouble());            
+            Assert.AreEqual(null, "foo".ToDouble());
+            Assert.AreEqual(-256.33, r.ToDouble());
         }
 
         [TestMethod]
@@ -142,7 +142,7 @@ namespace SushiTests
             Assert.AreEqual(x, "100".ToInt64());
             Assert.AreEqual(null, "foo".ToInt64());
             Assert.AreEqual(-256, r.ToInt64());
-            Assert.AreEqual(long.MaxValue, n.ToInt64());            
+            Assert.AreEqual(long.MaxValue, n.ToInt64());
         }
 
         [TestMethod]
@@ -183,17 +183,17 @@ namespace SushiTests
         public void IsGuid()
         {
             var guids = new Dictionary<string, bool>
-                         {
-                             { "21CD5E48-0AD5-4DB7-8667-19A77D4CF89E", true },
-                             { "B3767076-6C3E-42BC-B501-AF0D385179D8", true },
-                             { "28303425741D4253903B8D3FDCB0DA73", true },
-                             { "{26E348C6-DA63-485E-A35B-F8DC5DA84ABC}", true },
+                        {
+                            { "21CD5E48-0AD5-4DB7-8667-19A77D4CF89E", true },
+                            { "B3767076-6C3E-42BC-B501-AF0D385179D8", true },
+                            { "28303425741D4253903B8D3FDCB0DA73", true },
+                            { "{26E348C6-DA63-485E-A35B-F8DC5DA84ABC}", true },
 
                             { "FOO-FOO-FOO-FOO-FOO", false },
                             { "!26E348C6-DA63-485E-A35B-F8DC5DA84ABC!", false },
                             { "17ED8272-9280-4B14-8816-82525FF3B0C", false },
                             { "38062CB7-6893-4BC4-8AB3-41722Z60E8FA", false },
-                         };
+                        };
 
             foreach (var g in guids)
             {
@@ -207,17 +207,17 @@ namespace SushiTests
         public void ToGuid()
         {
             var guids = new Dictionary<string, bool>
-                         {
-                             { "21CD5E48-0AD5-4DB7-8667-19A77D4CF89E", true },
-                             { "B3767076-6C3E-42BC-B501-AF0D385179D8", true },
-                             { "28303425741D4253903B8D3FDCB0DA73", true },
-                             { "{26E348C6-DA63-485E-A35B-F8DC5DA84ABC}", true },
+                        {
+                            { "21CD5E48-0AD5-4DB7-8667-19A77D4CF89E", true },
+                            { "B3767076-6C3E-42BC-B501-AF0D385179D8", true },
+                            { "28303425741D4253903B8D3FDCB0DA73", true },
+                            { "{26E348C6-DA63-485E-A35B-F8DC5DA84ABC}", true },
 
                             { "FOO-FOO-FOO-FOO-FOO", false },
                             { "!26E348C6-DA63-485E-A35B-F8DC5DA84ABC!", false },
                             { "17ED8272-9280-4B14-8816-82525FF3B0C", false },
                             { "38062CB7-6893-4BC4-8AB3-41722Z60E8FA", false },
-                         };
+                        };
 
             foreach (var g in guids)
             {
@@ -226,7 +226,7 @@ namespace SushiTests
                 if (g.Value)
                     Assert.AreNotEqual(null, ng, $"Test failed for {g.Key} which should NOT be null.");
                 else
-                    Assert.AreEqual(null, ng, $"Test failed for {g.Key} which should be null.");                
+                    Assert.AreEqual(null, ng, $"Test failed for {g.Key} which should be null.");
             }
 
             Assert.AreNotEqual(null, Guid.NewGuid().ToGuid());
@@ -234,7 +234,7 @@ namespace SushiTests
 
         [TestMethod]
         public void ToBoolean()
-        {                        
+        {
             Assert.AreEqual(true, "true".ToBoolean());
             Assert.AreEqual(true, "True".ToBoolean());
             Assert.AreEqual(true, "1".ToBoolean());
@@ -256,9 +256,11 @@ namespace SushiTests
         [TestMethod]
         public void ToStringWithoutDiacritics()
         {
-            Assert.AreEqual("Prilis zlutoucky kun upel dabelske ody!", "Příliš žluťoučký kůň úpěl ďábelské ódy!".ToStringWithoutDiacritics());            
+            Assert.AreEqual("Prilis zlutoucky kun upel dabelske ody!", "Příliš žluťoučký kůň úpěl ďábelské ódy!".ToStringWithoutDiacritics());
             Assert.AreEqual("azk do kviz xnaca", "ázk do kvíz xnácá".ToStringWithoutDiacritics());
-            Assert.AreEqual("AAAAAACEEEEIIIIDNOOOOOOUUUUYaaaaaaceeeeiiiinoooooouuuuyyAaAaAaCcCcDdDdEeEeEeEeGgGgIiIiIiKkLlLlLlLlNnNnNnOoOoRrRrRrSsSsSsTtTtUuUuUuUuYZzZzZzOoUu", "ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝàáâãäåçèéêëìíîïñòóôõöøùúûüýÿĀāĂăĄąĆćČčĎďĐđĒēĖėĘęĚěĞğĢģĪīĮįİıĶķĹĺĻļĽľŁłŃńŅņŇňŌōŐőŔŕŖŗŘřŚśŞşŠšŢţŤťŪūŮůŰűŲųŸŹźŻżŽžƠơƯư".ToStringWithoutDiacritics());
+            Assert.AreEqual("AAAAAACEEEEIIIIDNOOOOOOUUUUYaaaaaaceeeeiiiinoooooouuuuyyAaAaAaCcCcDdDdEeEeEeEeGgGgIiIiIiKkLlLlLlLlNnNnNnOoOoRrRrRrSsSsSsTtTtUuUuUuUuYZzZzZzOoUu",
+                            "ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝàáâãäåçèéêëìíîïñòóôõöøùúûüýÿĀāĂăĄąĆćČčĎďĐđĒēĖėĘęĚěĞğĢģĪīĮįİıĶķĹĺĻļĽľŁłŃńŅņŇňŌōŐőŔŕŖŗŘřŚśŞşŠšŢţŤťŪūŮůŰűŲųŸŹźŻżŽžƠơƯư"
+                                .ToStringWithoutDiacritics());
         }
 
         [TestMethod]
@@ -266,7 +268,7 @@ namespace SushiTests
         public void ToStringWithoutDiacriticsNullException()
         {
             string test = null;
-            test.ToStringWithoutDiacritics();                      
+            test.ToStringWithoutDiacritics();
         }
 
         [TestMethod]
@@ -279,7 +281,7 @@ namespace SushiTests
 
         [TestMethod]
         public void ToMimeType()
-        {            
+        {
             Assert.AreEqual("image/jpeg", "foo.jpg".ToMimeType());
             Assert.AreEqual("image/jpeg", "foo.jpeg".ToMimeType());
             Assert.AreEqual("video/ogg", "video.ogv".ToMimeType());
@@ -292,7 +294,7 @@ namespace SushiTests
         public void ToMimeTypeNullException()
         {
             string filename = null;
-            filename.ToMimeType();            
+            filename.ToMimeType();
         }
 
         public class SmartTag : Attribute
@@ -306,9 +308,9 @@ namespace SushiTests
         }
 
         public class FooTag : Attribute
-        {            
+        {
             public FooTag()
-            {                
+            {
             }
         }
 
@@ -321,18 +323,18 @@ namespace SushiTests
         public class Einstein
         {
             [SmartTag("name")]
-            public string Name { get; set; }            
+            public string Name { get; set; }
         }
 
         [TestMethod]
         public void GetAttribute()
-        {            
+        {
             var a0 = TestEnum.Goto10.GetAttribute<SmartTag>();
             var a1 = TestEnum.Goto10.GetAttribute<FooTag>();
-                        
+
             Assert.AreNotEqual(null, a0);
             Assert.AreEqual("goto10", a0.Foo);
-            Assert.AreEqual(null, a1);            
+            Assert.AreEqual(null, a1);
         }
 
         [TestMethod]
@@ -350,10 +352,10 @@ namespace SushiTests
 
         [TestMethod]
         public void ToEpoch()
-        {            
+        {
             Assert.AreEqual(0, new DateTime(1970, 1, 1).ToEpoch());
             Assert.AreEqual(1483285244, new DateTime(2017, 1, 1, 15, 40, 44).ToEpoch());
-            Assert.AreEqual(-1262276879, new DateTime(1930, 1, 1, 7, 32, 1).ToEpoch());            
+            Assert.AreEqual(-1262276879, new DateTime(1930, 1, 1, 7, 32, 1).ToEpoch());
         }
 
         [TestMethod]
@@ -369,6 +371,19 @@ namespace SushiTests
             Assert.AreEqual(30, new DateTime(2017, 7, 24).ToIso8601WeekOfYear());
             Assert.AreEqual(30, new DateTime(2017, 7, 29).ToIso8601WeekOfYear());
             Assert.AreEqual(30, new DateTime(2017, 7, 30).ToIso8601WeekOfYear());
+        }
+
+        [TestMethod]
+        public void Shuffle()
+        {
+            var list = new List<int> { 2, 3, 4, 999, 1, 8, 777, 426, 5 };
+            var list2 = new List<int> { 2, 3, 4, 999, 1, 8, 777, 426, 5 };
+
+            Assert.AreEqual(list.Count, list2.Count);
+            CollectionAssert.AreEqual(list, list2);
+            list2.Shuffle();
+            Assert.AreEqual(list.Count, list2.Count);
+            CollectionAssert.AreNotEqual(list, list2);
         }
     }
 }
