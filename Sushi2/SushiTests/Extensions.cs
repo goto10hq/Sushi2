@@ -355,5 +355,20 @@ namespace SushiTests
             Assert.AreEqual(1483285244, new DateTime(2017, 1, 1, 15, 40, 44).ToEpoch());
             Assert.AreEqual(-1262276879, new DateTime(1930, 1, 1, 7, 32, 1).ToEpoch());            
         }
+
+        [TestMethod]
+        public void ToIso8601WeekOfYear()
+        {
+            Assert.AreEqual(52, new DateTime(2017, 1, 1).ToIso8601WeekOfYear());
+            Assert.AreEqual(1, new DateTime(2007, 12, 31).ToIso8601WeekOfYear());
+            Assert.AreEqual(28, new DateTime(2017, 7, 15).ToIso8601WeekOfYear());
+            Assert.AreEqual(28, new DateTime(2017, 7, 16).ToIso8601WeekOfYear());
+            Assert.AreEqual(29, new DateTime(2017, 7, 17).ToIso8601WeekOfYear());
+            Assert.AreEqual(29, new DateTime(2017, 7, 18).ToIso8601WeekOfYear());
+            Assert.AreEqual(29, new DateTime(2017, 7, 23).ToIso8601WeekOfYear());
+            Assert.AreEqual(30, new DateTime(2017, 7, 24).ToIso8601WeekOfYear());
+            Assert.AreEqual(30, new DateTime(2017, 7, 29).ToIso8601WeekOfYear());
+            Assert.AreEqual(30, new DateTime(2017, 7, 30).ToIso8601WeekOfYear());
+        }
     }
 }

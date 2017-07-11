@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -526,6 +527,42 @@ namespace Sushi2
 
             // throws InvalidCastException if types are incompatible
             return (T)retval;
+        }
+
+        /// <summary>
+        /// Get week of year based on ISO 8601.
+        /// </summary>
+        /// <param name="dateTime">Datetime.</param>
+        /// <returns>The week number.</returns>
+        public static int ToIso8601WeekOfYear(this DateTime dateTime)
+        {
+            while (true)
+            {
+                var startOfYear = dateTime.AddDays(-dateTime.Day + 1).AddMonths(-dateTime.Month + 1);
+
+                // get dec 31st of the year
+                var endOfYear = startOfYear.AddYears(1).AddDays(-1);
+
+                // ISO 8601 weeks start with Monday 
+                // The first week of a year includes the first Thursday 
+                // returns 0 for sunday up to 6 for saturday
+                int[] iso8601Correction = { 6, 7, 8, 9, 10, 4, 5 };
+                var nds = dateTime.Subtract(startOfYear).Days + iso8601Correction[(int)startOfYear.DayOfWeek];
+                var wk = nds / 7;
+
+                switch (wk)
+                {
+                    case 0:
+                        // return weeknumber of dec 31st of the previous year
+                        dateTime = startOfYear.AddDays(-1);
+                        continue;
+                    case 53:
+                        // if dec 31st falls before thursday it is week 01 of next year
+                        return endOfYear.DayOfWeek < DayOfWeek.Thursday ? 1 : wk;
+                    default:
+                        return wk;
+                }                
+            }
         }
     }
 }
