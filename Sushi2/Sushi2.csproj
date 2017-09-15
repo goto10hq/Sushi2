@@ -3,15 +3,15 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>Sushi2</PackageId>
-    <PackageVersion>1.0.2</PackageVersion>
+    <Title>Sushi2</Title>
+    <Version>1.0.2</Version>
     <Authors>frohikey</Authors>    
     <PackageLicenseUrl>https://github.com/goto10hq/Sushi2/blob/master/LICENSE</PackageLicenseUrl>
     <Owners>Goto10</Owners>
     <PackageProjectUrl>https://github.com/goto10hq/Sushi2</PackageProjectUrl>
     <Summary>Utility library for cool kids.</Summary>
-    <PackageTags>utility</PackageTags>
-    <Title>Sushi2</Title>
     <Description>Utility library for cool kids.</Description>
+    <PackageTags>utility</PackageTags>        
   </PropertyGroup>
 
 </Project>
