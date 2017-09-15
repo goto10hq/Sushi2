@@ -586,5 +586,16 @@ namespace Sushi2
                 list[n] = value;
             }
         }
+
+        // public static IEnumerable<string> ToCommands(this string input)
+        // {
+        //     var result = input.Split('"')
+        //         .Select((element, index) => index % 2 == 0  // If even index
+        //                     ? element.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)  // Split the item
+        //                     : new[] { element })  // Keep the entire item
+        //         .SelectMany(element => element).ToList();
+
+        //     return result;
+        // }
     }
 }

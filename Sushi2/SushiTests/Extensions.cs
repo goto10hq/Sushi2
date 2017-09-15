@@ -256,6 +256,7 @@ namespace SushiTests
         [TestMethod]
         public void ToStringWithoutDiacritics()
         {
+            //TODO: test æ
             Assert.AreEqual("Prilis zlutoucky kun upel dabelske ody!", "Příliš žluťoučký kůň úpěl ďábelské ódy!".ToStringWithoutDiacritics());
             Assert.AreEqual("azk do kviz xnaca", "ázk do kvíz xnácá".ToStringWithoutDiacritics());
             Assert.AreEqual("AAAAAACEEEEIIIIDNOOOOOOUUUUYaaaaaaceeeeiiiinoooooouuuuyyAaAaAaCcCcDdDdEeEeEeEeGgGgIiIiIiKkLlLlLlLlNnNnNnOoOoRrRrRrSsSsSsTtTtUuUuUuUuYZzZzZzOoUu",
