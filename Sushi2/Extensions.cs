@@ -597,5 +597,56 @@ namespace Sushi2
 
         //     return result;
         // }
+
+        /// <summary>
+	    /// Implode a collection of object to string.
+	    /// </summary>
+	    /// <param name="list">A list of objects.</param>
+	    /// <param name="split">Split string.</param>
+	    /// <param name="lastSplit">Last split string.</param>
+	    /// <returns>One big string of all the objects.</returns>
+	    public static string ToImplodedString<T>(this IEnumerable<T> list, string split = ", ", string lastSplit = null)
+        {
+            if (list == null)
+                throw new ArgumentNullException(nameof(list));
+
+            if (split == null)
+                throw new ArgumentNullException(nameof(split));
+
+            int count = list.Count();
+
+            var vals = new List<string>(count);
+
+            foreach (T o in list)
+                vals.Add(o.ToString());
+
+            if (count == 1)
+                return vals[0];
+
+            if (count == 2)
+            {
+                if (lastSplit != null)
+                    return vals[0] + lastSplit + vals[1];
+
+                return vals[0] + split + vals[1];
+            }
+
+            var res = new StringBuilder();
+
+            for (int i = 0; i < count; i++)
+            {
+                var s = split;
+
+                if (i == count - 1 && lastSplit != null)
+                    s = lastSplit;
+
+                if (res.Length != 0)
+                    res.Append(s);
+
+                res.Append(vals[i]);
+            }
+
+            return res.ToString();
+        }
     }
 }

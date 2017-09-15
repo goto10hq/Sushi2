@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Sushi2;
-using System.Globalization;
 
 namespace SushiTests
 {
@@ -385,6 +384,26 @@ namespace SushiTests
             list2.Shuffle();
             Assert.AreEqual(list.Count, list2.Count);
             CollectionAssert.AreNotEqual(list, list2);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException), "Null string was inappropriately allowed.")]
+        public void ToImplodedStringNullException()
+        {
+            string test = null;
+            test.ToImplodedString();            
+        }
+
+        [TestMethod]        
+        public void ToImplodedString()
+        {
+            var list = new List<object> { "a", 3 };
+            var list2 = new List<object> { "a", 3, "b" };
+
+            Assert.AreEqual("a and 3", list.ToImplodedString(", ", " and "));
+            Assert.AreEqual("a, 3 and b", list2.ToImplodedString(", ", " and "));
+            Assert.AreEqual("a, 3, b", list2.ToImplodedString());
+            Assert.AreEqual("a3b", list2.ToImplodedString(string.Empty));
         }
     }
 }
