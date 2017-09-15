@@ -308,10 +308,7 @@ namespace SushiTests
         }
 
         public class FooTag : Attribute
-        {
-            public FooTag()
-            {
-            }
+        {            
         }
 
         public enum TestEnum
