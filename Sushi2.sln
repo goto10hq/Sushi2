@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.15
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sushi2", "Sushi2\Sushi2.csproj", "{CF4ACF66-FE12-4828-A079-CA62DF504D30}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{9C1523F9-1583-4483-8C64-FA22BB08E808}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CF4ACF66-FE12-4828-A079-CA62DF504D30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF4ACF66-FE12-4828-A079-CA62DF504D30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF4ACF66-FE12-4828-A079-CA62DF504D30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF4ACF66-FE12-4828-A079-CA62DF504D30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C1523F9-1583-4483-8C64-FA22BB08E808}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C1523F9-1583-4483-8C64-FA22BB08E808}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C1523F9-1583-4483-8C64-FA22BB08E808}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C1523F9-1583-4483-8C64-FA22BB08E808}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2444FA28-21C9-4618-BCD1-4E1E17D120ED}
+	EndGlobalSection
+EndGlobal
