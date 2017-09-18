@@ -309,6 +309,7 @@ namespace SushiTests
 
         public class FooTag : Attribute
         {            
+            public string Foo { get; }
         }
 
         public enum TestEnum
@@ -317,6 +318,7 @@ namespace SushiTests
             Goto10
         }
 
+        [SmartTag("too smart")]
         public class Einstein
         {
             [SmartTag("name")]
@@ -335,16 +337,44 @@ namespace SushiTests
         }
 
         [TestMethod]
+        public void GetAttribute2()
+        {
+            var a0 = typeof(Einstein).GetAttribute<SmartTag>();
+            var a1 = typeof(Einstein).GetAttribute<FooTag>();
+
+            Assert.AreNotEqual(null, a0);
+            Assert.AreEqual("too smart", a0.Foo);
+            Assert.AreEqual(null, a1);
+        }
+
+        [TestMethod]
+        public void GetAttributeValue()
+        {
+            var a0 = typeof(Einstein).GetAttributeValue((SmartTag a) => a.Foo);
+            var a1 = typeof(Einstein).GetAttributeValue((FooTag a) => a.Foo);
+
+            Assert.AreNotEqual(null, a0);
+            Assert.AreEqual("too smart", a0);
+            Assert.AreEqual(null, a1);
+        }
+
+        [TestMethod]
         public void GetPropertyValue()
         {
             var e = new Einstein { Name = "Cocona" };
             var a0 = e.GetPropertyValue("Name");
             var a1 = e.GetPropertyValue<string>("Name");
+            var a2 = e.GetPropertyValue<string>("name");
+            var n0 = e.GetPropertyValue<string>("FunnyBusiness");
+            var n1 = e.GetPropertyValue<string>("Funny Business");
 
             Assert.AreNotEqual(null, a0);
             Assert.AreNotEqual(null, a1);
             Assert.AreEqual("Cocona", a0.ToString());
             Assert.AreEqual("Cocona", a1);
+            Assert.AreEqual(null, a2);
+            Assert.AreEqual(null, n0);
+            Assert.AreEqual(null, n1);
         }
 
         [TestMethod]

@@ -461,8 +461,8 @@ namespace Sushi2
                 ext = ext.Substring(1);
 
             return !_mimeTypes.ContainsKey(ext) ? _defaultMimeType : _mimeTypes[ext];
-        }        
-                
+        }
+
         /// <summary>
         /// Get attribute of enum.
         /// </summary>
@@ -470,11 +470,33 @@ namespace Sushi2
         {
             var memberInfo = enumValue.GetType().GetTypeInfo().GetMember(enumValue.ToString()).FirstOrDefault();
 
-            var attribute = (T)memberInfo?.GetCustomAttributes(typeof(T), false).FirstOrDefault();
+            var attribute = (T)memberInfo?.GetCustomAttributes(typeof(T), true).FirstOrDefault();
 
             return attribute;
         }
-        
+
+        /// <summary>
+        /// Get attribute of enum.
+        /// </summary>
+        public static T GetAttribute<T>(this Type type) where T : Attribute
+        {
+            if (type.GetCustomAttributes(typeof(T), true).FirstOrDefault() is T att)
+                return att;
+
+            return default(T);
+        }
+
+        /// <summary>
+        /// Get attribute of any object.
+        /// </summary>
+        public static TValue GetAttributeValue<TAttribute, TValue>(this Type type, Func<TAttribute, TValue> valueSelector) where TAttribute : Attribute
+        {
+            if (type.GetCustomAttributes(typeof(TAttribute), true).FirstOrDefault() is TAttribute att)            
+                return valueSelector(att);            
+
+            return default(TValue);
+        }
+
         /// <summary>
         /// Convert date time to epoch.
         /// </summary>

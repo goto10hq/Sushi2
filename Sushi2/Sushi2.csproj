@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>Sushi2</PackageId>
     <Title>Sushi2</Title>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
     <Authors>frohikey</Authors>    
     <PackageLicenseUrl>https://github.com/goto10hq/Sushi2/blob/master/LICENSE</PackageLicenseUrl>
     <Owners>Goto10</Owners>
