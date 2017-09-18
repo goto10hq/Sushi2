@@ -340,6 +340,7 @@ namespace SushiTests
             var e = new Einstein { Name = "Cocona" };
             var a0 = e.GetPropertyValue("Name");
             var a1 = e.GetPropertyValue<string>("Name");
+            var a2 = e.GetPropertyValue<string>("name");
             var n0 = e.GetPropertyValue<string>("FunnyBusiness");
             var n1 = e.GetPropertyValue<string>("Funny Business");
 
@@ -347,6 +348,7 @@ namespace SushiTests
             Assert.AreNotEqual(null, a1);
             Assert.AreEqual("Cocona", a0.ToString());
             Assert.AreEqual("Cocona", a1);
+            Assert.AreNotEqual(null, a2);
             Assert.AreEqual(null, n0);
             Assert.AreEqual(null, n1);
         }
