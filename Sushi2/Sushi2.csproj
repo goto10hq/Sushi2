@@ -4,14 +4,17 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>Sushi2</PackageId>
     <Title>Sushi2</Title>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <Authors>frohikey</Authors>    
     <PackageLicenseUrl>https://github.com/goto10hq/Sushi2/blob/master/LICENSE</PackageLicenseUrl>
     <Owners>Goto10</Owners>
     <PackageProjectUrl>https://github.com/goto10hq/Sushi2</PackageProjectUrl>
     <Summary>Utility library for cool kids.</Summary>
     <Description>Utility library for cool kids.</Description>
-    <PackageTags>utility</PackageTags>        
+    <PackageTags>utility</PackageTags>
+    <Copyright>Copyright (c) 2017 Goto10 s.r.o.</Copyright>
+    <Company>Goto10</Company>
+    <RepositoryUrl>https://github.com/goto10hq/Sushi2</RepositoryUrl>        
   </PropertyGroup>
 
 </Project>
