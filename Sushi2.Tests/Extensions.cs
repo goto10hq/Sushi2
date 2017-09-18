@@ -371,16 +371,19 @@ namespace SushiTests
         }
 
         [TestMethod]
-        public void Shuffle()
+        public void ToShuffledCollection()
         {
             var list = new List<int> { 2, 3, 4, 999, 1, 8, 777, 426, 5 };
             var list2 = new List<int> { 2, 3, 4, 999, 1, 8, 777, 426, 5 };
 
             Assert.AreEqual(list.Count, list2.Count);
             CollectionAssert.AreEqual(list, list2);
-            list2.Shuffle();
+
+            var list3 = list2.ToShuffledCollection().ToList();
             Assert.AreEqual(list.Count, list2.Count);
-            CollectionAssert.AreNotEqual(list, list2);
+            Assert.AreEqual(list.Count, list3.Count);
+            CollectionAssert.AreEqual(list, list2);
+            CollectionAssert.AreNotEqual(list, list3);
         }
 
         [TestMethod]
