@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -458,7 +457,7 @@ namespace Sushi2
             if (string.IsNullOrEmpty(ext))
                 return _defaultMimeType;
 
-            if (ext.StartsWith("."))
+            if (ext.StartsWith(".", StringComparison.Ordinal))
                 ext = ext.Substring(1);
 
             return !_mimeTypes.ContainsKey(ext) ? _defaultMimeType : _mimeTypes[ext];
@@ -567,12 +566,15 @@ namespace Sushi2
         }
 
         /// <summary>
-        /// Shuffle list.
+        /// Get shuffled collection.
         /// </summary>
-        public static void Shuffle<T>(this IList<T> list)
+        /// <param name="collection">Original collection.</param>
+        /// <returns>Shuffled collection.</returns>
+        public static IEnumerable<T> ToShuffledCollection<T>(this IEnumerable<T> collection)
         {
-            var provider = RandomNumberGenerator.Create();
-            var n = list.Count;
+            var provider = RandomNumberGenerator.Create();            
+            var result = collection.ToList();
+            var n = result.Count;
 
             while (n > 1)
             {
@@ -581,10 +583,12 @@ namespace Sushi2
                 while (!(box[0] < n * (byte.MaxValue / n)));
                 var k = (box[0] % n);
                 n--;
-                var value = list[k];
-                list[k] = list[n];
-                list[n] = value;
+                var value = result[k];
+                result[k] = result[n];
+                result[n] = value;
             }
+
+            return result;
         }
 
         // public static IEnumerable<string> ToCommands(this string input)
