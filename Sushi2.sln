@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.15
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sushi2", "Sushi2\Sushi2.csproj", "{CF4ACF66-FE12-4828-A079-CA62DF504D30}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sushi2", "Sushi2\Sushi2.csproj", "{CF4ACF66-FE12-4828-A079-CA62DF504D30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{9C1523F9-1583-4483-8C64-FA22BB08E808}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sushi2.Tests", "Sushi2.Tests\Sushi2.Tests.csproj", "{9C1523F9-1583-4483-8C64-FA22BB08E808}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
