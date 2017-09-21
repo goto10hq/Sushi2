@@ -532,7 +532,7 @@ namespace Sushi2
             }
 
             return obj;
-        }
+        }       
 
         /// <summary>
         /// Get property value using reflection.
