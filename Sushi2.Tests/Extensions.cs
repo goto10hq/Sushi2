@@ -435,5 +435,14 @@ namespace SushiTests
             Assert.AreEqual("a, 3, b", list2.ToImplodedString());
             Assert.AreEqual("a3b", list2.ToImplodedString(string.Empty));
         }
+
+        [TestMethod]
+        public void ToReplacedString()
+        {
+            Assert.AreEqual("hello Mr. Rob!", "hello Mr. Bob!".ToReplacedString("bob", "Rob"));
+            Assert.AreEqual("hello Mr. Bob!", "hello Mr. Bob!".ToReplacedString("bob", "Rob", StringComparison.Ordinal));
+            Assert.AreEqual("+++", "...".ToReplacedString(".", "+"));
+            Assert.AreEqual("+.", "...".ToReplacedString("..", "+"));
+        }
     }
 }
