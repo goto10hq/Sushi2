@@ -16,7 +16,7 @@ namespace Sushi2
     {
         /// <summary>
         /// Convert string to db string. Never null and trimmed.
-        /// </summary>		
+        /// </summary>
         public static string ToDbString(this string text)
         {
             text = text ?? "";
@@ -26,8 +26,8 @@ namespace Sushi2
 
         /// <summary>
         /// Convert string to db string. Never null and trimmed, diacritics removed and lowered.
-        /// </summary>	
-        /// <param name="text">Text.</param>	
+        /// </summary>
+        /// <param name="text">Text.</param>
         /// <returns>Normalized text.</returns>
         public static string ToNormalizedString(this string text)
         {
@@ -623,6 +623,45 @@ namespace Sushi2
 
         //     return result;
         // }
+
+        /// <summary>
+        /// Gets string with replaced values.
+        /// </summary>
+        /// <returns>The string.</returns>
+        /// <param name="original">Original.</param>
+        /// <param name="oldValue">Old value.</param>
+        /// <param name="newValue">New value.</param>
+        /// <param name="comparison">Comparison.</param>
+        public static string ToReplacedString(this string original, string oldValue, string newValue, StringComparison comparison = StringComparison.OrdinalIgnoreCase)
+        {
+            if (newValue == null)
+                throw new ArgumentNullException(nameof(newValue));
+            
+            if (oldValue == null)
+                throw new ArgumentNullException(nameof(oldValue));
+            
+            if (original == null)
+                throw new ArgumentNullException(nameof(original));
+            
+            var sb = new StringBuilder();
+
+            var previousIndex = 0;
+            var index = original.IndexOf(oldValue, comparison);
+
+            while (index != -1)
+            {
+                sb.Append(original.Substring(previousIndex, index - previousIndex));
+                sb.Append(newValue);
+
+                index += oldValue.Length;
+                previousIndex = index;
+                index = original.IndexOf(oldValue, index, comparison);
+            }
+
+            sb.Append(original.Substring(previousIndex));
+
+            return sb.ToString();
+        }
 
         /// <summary>
 	    /// Implode a collection of object to string.
