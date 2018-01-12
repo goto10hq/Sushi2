@@ -36,8 +36,8 @@ namespace Sushi2
 
         /// <summary>
         /// Convert string to sort string. Can be sorted by classic binary sorting.
-        /// </summary>	
-        /// <param name="text">Text.</param>	
+        /// </summary>
+        /// <param name="text">Text.</param>
         /// <returns>Sort text.</returns>
         public static string ToSortedString(this string text)
         {
@@ -67,18 +67,23 @@ namespace Sushi2
                         case "ž":
                             result += "zz";
                             break;
+
                         case "e":
                             result += "f0";
                             break;
+
                         case "ě":
                             result += "f1";
                             break;
+
                         case "ú":
                             result += "v0";
                             break;
+
                         case "ů":
                             result += "v1";
                             break;
+
                         default:
                             result += (char)(Convert.ToChar(norm) + 1);
                             result += "*";
@@ -93,7 +98,7 @@ namespace Sushi2
         /// <summary>
         /// Tries to convert a given object to nullable DateTime.
         /// </summary>
-        /// <param name="o">Object.</param>        
+        /// <param name="o">Object.</param>
         /// <returns>DateTime? value or null.</returns>
         public static DateTime? ToDateTime(this object o)
         {
@@ -112,7 +117,7 @@ namespace Sushi2
         /// <summary>
         /// Tries to convert a given object to nullable usigned byte.
         /// </summary>
-        /// <param name="o">Object.</param>        
+        /// <param name="o">Object.</param>
         /// <returns>byte? or null.</returns>
         public static byte? ToByte(this object o)
         {
@@ -131,7 +136,7 @@ namespace Sushi2
         /// <summary>
         /// Tries to convert a given object to nullable int 16.
         /// </summary>
-        /// <param name="o">Object.</param>        
+        /// <param name="o">Object.</param>
         /// <returns>Int16? or null.</returns>
         public static short? ToInt16(this object o)
         {
@@ -149,7 +154,7 @@ namespace Sushi2
         /// <summary>
         /// Tries to convert a given object to nullable int 32.
         /// </summary>
-        /// <param name="o">Object.</param>        
+        /// <param name="o">Object.</param>
         /// <returns>Int32? or null.</returns>
         public static int? ToInt32(this object o)
         {
@@ -167,7 +172,7 @@ namespace Sushi2
         /// <summary>
         /// Tries to convert a given object to nullable double.
         /// </summary>
-        /// <param name="o">Object.</param>        
+        /// <param name="o">Object.</param>
         /// <returns>Double? or null.</returns>
         public static double? ToDouble(this object o)
         {
@@ -185,7 +190,7 @@ namespace Sushi2
         /// <summary>
         /// Tries to convert a given object to nullable int 64.
         /// </summary>
-        /// <param name="o">Object.</param>        
+        /// <param name="o">Object.</param>
         /// <returns>Int64? or null.</returns>
         public static long? ToInt64(this object o)
         {
@@ -204,7 +209,7 @@ namespace Sushi2
         /// Tries to convert a given object to float.
         /// </summary>
         /// <param name="o">Object.</param>
-        /// <returns>float? or null.</returns>               
+        /// <returns>float? or null.</returns>
         public static float? ToFloat(this object o)
         {
             if (o == null)
@@ -246,7 +251,7 @@ namespace Sushi2
         /// Tries to convert a given object to decimal.
         /// </summary>
         /// <param name="o">Object.</param>
-        /// <returns>decimal? or null.</returns>      
+        /// <returns>decimal? or null.</returns>
         public static decimal? ToDecimal(this object o)
         {
             if (o == null)
@@ -317,7 +322,7 @@ namespace Sushi2
 
             return (IsGuid(o) ? ((Guid?)new Guid(o.ToString())) : null);
         }
-        
+
         /// <summary>
         /// Tries to convert a given value to bool?.
         /// </summary>
@@ -371,14 +376,14 @@ namespace Sushi2
                 result.Append(pos >= 0 ? simplifiedText[pos] : s[i]);
             }
 
-            s =  result.ToString();
+            s = result.ToString();
 
             var newStringBuilder = new StringBuilder();
-                newStringBuilder.Append(s.Normalize(NormalizationForm.FormKD)
-                                                .Where(x => x < 128)
-                                                .ToArray());
+            newStringBuilder.Append(s.Normalize(NormalizationForm.FormKD)
+                                            .Where(x => x < 128)
+                                            .ToArray());
 
-           return newStringBuilder.ToString();                        
+            return newStringBuilder.ToString();
         }
 
         /// <summary>
@@ -401,8 +406,8 @@ namespace Sushi2
                 "ŇňNn",
                 "ÓÖOoóö",
                 "ŘřRr",
-                "ŠSšs",				
-				"ŤťTt",
+                "ŠSšs",
+                "ŤťTt",
                 "ŮÚÜůúüUu",
                 "YÝýy",
                 "ŽžZz",
@@ -440,7 +445,7 @@ namespace Sushi2
             }
 
             return result;
-        }                          
+        }
 
         /// <summary>
         /// Get mime type according to filename.
@@ -491,8 +496,8 @@ namespace Sushi2
         /// </summary>
         public static TValue GetAttributeValue<TAttribute, TValue>(this Type type, Func<TAttribute, TValue> valueSelector) where TAttribute : Attribute
         {
-            if (type.GetCustomAttributes(typeof(TAttribute), true).FirstOrDefault() is TAttribute att)            
-                return valueSelector(att);            
+            if (type.GetCustomAttributes(typeof(TAttribute), true).FirstOrDefault() is TAttribute att)
+                return valueSelector(att);
 
             return default(TValue);
         }
@@ -520,7 +525,7 @@ namespace Sushi2
                 return null;
 
             foreach (var part in name.Split('.'))
-            {                
+            {
                 var type = obj.GetType();
 
                 var info = type.GetTypeInfo().GetProperty(part);
@@ -532,7 +537,7 @@ namespace Sushi2
             }
 
             return obj;
-        }       
+        }
 
         /// <summary>
         /// Get property value using reflection.
@@ -565,8 +570,8 @@ namespace Sushi2
                 // get dec 31st of the year
                 var endOfYear = startOfYear.AddYears(1).AddDays(-1);
 
-                // ISO 8601 weeks start with Monday 
-                // The first week of a year includes the first Thursday 
+                // ISO 8601 weeks start with Monday
+                // The first week of a year includes the first Thursday
                 // returns 0 for sunday up to 6 for saturday
                 int[] iso8601Correction = { 6, 7, 8, 9, 10, 4, 5 };
                 var nds = dateTime.Subtract(startOfYear).Days + iso8601Correction[(int)startOfYear.DayOfWeek];
@@ -581,10 +586,11 @@ namespace Sushi2
                     case 53:
                         // if dec 31st falls before thursday it is week 01 of next year
                         return endOfYear.DayOfWeek < DayOfWeek.Thursday ? 1 : wk;
+
                     default:
                         return wk;
-                }                
-            }            
+                }
+            }
         }
 
         /// <summary>
@@ -594,7 +600,7 @@ namespace Sushi2
         /// <returns>Shuffled collection.</returns>
         public static IEnumerable<T> ToShuffledCollection<T>(this IEnumerable<T> collection)
         {
-            var provider = RandomNumberGenerator.Create();            
+            var provider = RandomNumberGenerator.Create();
             var result = collection.ToList();
             var n = result.Count;
 
@@ -712,6 +718,52 @@ namespace Sushi2
             }
 
             return res.ToString();
+        }
+
+        /// <summary>
+		/// Convert string to safe filename.
+		/// </summary>
+		/// <param name="fileName">Filename.</param>
+		/// <returns>Safe filename.</returns>
+		public static string ToFilename(this string fileName)
+        {
+            return fileName.ToFilename("_");
+        }
+
+        /// <summary>
+        /// Convert string to safe filename.
+        /// </summary>
+        /// <param name="fileName">Filename.</param>
+        /// <param name="safePart">Safe part with which to replace unsafe chars.</param>
+        /// <returns>Safe filename.</returns>
+        public static string ToFilename(this string fileName, string safePart)
+        {
+            if (string.IsNullOrEmpty(fileName))
+                return fileName;
+
+            var sb = new StringBuilder();
+            var newFilename = fileName.ToStringWithoutDiacritics().ToLower().Trim();
+
+            foreach (var t in newFilename)
+            {
+                var r = new Regex("[qwertyuiopasdfghjklzxcvbnm0123456789_\\-\\.]", RegexOptions.IgnoreCase);
+
+                if (!r.IsMatch(t.ToString()))
+                    sb.Append(safePart);
+                else
+                    sb.Append(t);
+            }
+
+            newFilename = sb.ToString();
+
+            while (newFilename.ToCharArray().Count(c => c == '.') > 1)
+            {
+                int idx = newFilename.IndexOf('.');
+                newFilename = newFilename.Remove(idx, 1);
+                newFilename = newFilename.Insert(idx, safePart);
+            }
+
+            return newFilename;
         }
     }
 }

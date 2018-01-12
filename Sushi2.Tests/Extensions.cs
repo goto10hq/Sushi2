@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Sushi2;
 
 namespace Sushi2.Tests
 {
@@ -443,6 +442,17 @@ namespace Sushi2.Tests
             Assert.AreEqual("hello Mr. Bob!", "hello Mr. Bob!".ToReplacedString("bob", "Rob", StringComparison.Ordinal));
             Assert.AreEqual("+++", "...".ToReplacedString(".", "+"));
             Assert.AreEqual("+.", "...".ToReplacedString("..", "+"));
+        }
+
+        [TestMethod]
+        public void ToFilename()
+        {
+            Assert.AreEqual("aaa", "aaa".ToFilename());
+            Assert.AreEqual("aaa", "aAa".ToFilename());
+            Assert.AreEqual("a_3", "a 3".ToFilename());
+            Assert.AreEqual("a_3", "a 3".ToFilename());
+            Assert.AreEqual("a_-_3", "a 3".ToFilename("_-_"));
+            Assert.AreEqual("caCa__.jo.txt", "a 3".ToFilename("čaČa!.jo.txt"));
         }
     }
 }
