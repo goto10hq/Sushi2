@@ -5,7 +5,7 @@ using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Sushi2;
 
-namespace SushiTests
+namespace Sushi2.Tests
 {
     [TestClass]
     public class Extensions
@@ -308,7 +308,7 @@ namespace SushiTests
         }
 
         public class FooTag : Attribute
-        {            
+        {
             public string Foo { get; }
         }
 
@@ -421,10 +421,10 @@ namespace SushiTests
         public void ToImplodedStringNullException()
         {
             string test = null;
-            test.ToImplodedString();            
+            test.ToImplodedString();
         }
 
-        [TestMethod]        
+        [TestMethod]
         public void ToImplodedString()
         {
             var list = new List<object> { "a", 3 };

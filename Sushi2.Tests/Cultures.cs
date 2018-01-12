@@ -1,11 +1,11 @@
 ﻿using System.Globalization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace SushiTests
+namespace Sushi2.Tests
 {
     [TestClass]
     public class Cultures
-    {        
+    {
         [TestMethod]
         public void English()
         {
