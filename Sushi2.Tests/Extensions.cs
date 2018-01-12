@@ -452,7 +452,10 @@ namespace Sushi2.Tests
             Assert.AreEqual("a_3", "a 3".ToFilename());
             Assert.AreEqual("a_3", "a 3".ToFilename());
             Assert.AreEqual("a_-_3", "a 3".ToFilename("_-_"));
-            Assert.AreEqual("caCa__.jo.txt", "a 3".ToFilename("čaČa!.jo.txt"));
+            Assert.AreEqual("caca__jo.txt", "čaČa!.jo.txt".ToFilename(removeDoubledSafeParts: false));
+            Assert.AreEqual("caca_jo.txt", "čaČa!.jo.txt".ToFilename());
+            Assert.AreEqual("caca_jo.txt", "čaČa.jo.txt".ToFilename(removeDoubledSafeParts: false));
+            Assert.AreEqual("caca_.jo.txt", "čaČa!.jo.txt".ToFilename(removeAdditionalDots: false));
         }
     }
 }
