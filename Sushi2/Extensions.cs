@@ -638,17 +638,17 @@ namespace Sushi2
         /// <param name="oldValue">Old value.</param>
         /// <param name="newValue">New value.</param>
         /// <param name="comparison">Comparison.</param>
-        public static string ToReplacedString(this string original, string oldValue, string newValue, StringComparison comparison = StringComparison.OrdinalIgnoreCase)
+        public static string ToReplacedString(this string original, string oldValue, string newValue, StringComparison comparison = StringComparison.CurrentCultureIgnoreCase)
         {
             if (newValue == null)
                 throw new ArgumentNullException(nameof(newValue));
-            
+
             if (oldValue == null)
                 throw new ArgumentNullException(nameof(oldValue));
-            
+
             if (original == null)
                 throw new ArgumentNullException(nameof(original));
-            
+
             var sb = new StringBuilder();
 
             var previousIndex = 0;
@@ -721,25 +721,27 @@ namespace Sushi2
         }
 
         /// <summary>
-		/// Convert string to safe filename.
-		/// </summary>
-		/// <param name="fileName">Filename.</param>
-		/// <returns>Safe filename.</returns>
-		public static string ToFilename(this string fileName)
-        {
-            return fileName.ToFilename("_");
-        }
-
-        /// <summary>
         /// Convert string to safe filename.
         /// </summary>
         /// <param name="fileName">Filename.</param>
         /// <param name="safePart">Safe part with which to replace unsafe chars.</param>
+        /// <param name="removeAdditionalDots">Remove additional dots.</param>
+        /// <param name="removeDoubledSafeParts">Remove doubled safe parts.</param>
         /// <returns>Safe filename.</returns>
-        public static string ToFilename(this string fileName, string safePart)
+        public static string ToFilename(this string fileName, string safePart = "_", bool removeAdditionalDots = true, bool removeDoubledSafeParts = true)
         {
-            if (string.IsNullOrEmpty(fileName))
-                return fileName;
+            if (fileName == null)
+                throw new ArgumentNullException(nameof(fileName));
+
+            if (safePart == null)
+                throw new ArgumentNullException(nameof(safePart));
+
+            if (safePart != null &&
+                removeAdditionalDots &&
+                safePart.IndexOf(".", StringComparison.Ordinal) >= 0)
+            {
+                throw new ArgumentException("Safe part cannot contains '.' (dot) if removing additional dots mode is on.");
+            }
 
             var sb = new StringBuilder();
             var newFilename = fileName.ToStringWithoutDiacritics().ToLower().Trim();
@@ -756,11 +758,22 @@ namespace Sushi2
 
             newFilename = sb.ToString();
 
-            while (newFilename.ToCharArray().Count(c => c == '.') > 1)
+            if (removeAdditionalDots)
             {
-                int idx = newFilename.IndexOf('.');
-                newFilename = newFilename.Remove(idx, 1);
-                newFilename = newFilename.Insert(idx, safePart);
+                while (newFilename.ToCharArray().Count(c => c == '.') > 1)
+                {
+                    int idx = newFilename.IndexOf('.');
+                    newFilename = newFilename.Remove(idx, 1);
+                    newFilename = newFilename.Insert(idx, safePart);
+                }
+            }
+
+            if (removeDoubledSafeParts)
+            {
+                while (newFilename.IndexOf(safePart + safePart, StringComparison.CurrentCulture) >= 0)
+                {
+                    newFilename = newFilename.ToReplacedString(safePart + safePart, safePart, StringComparison.CurrentCulture);
+                }
             }
 
             return newFilename;
