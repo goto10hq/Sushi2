@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.ComponentModel;
 
 namespace Sushi2.Tests
 {
@@ -456,6 +457,33 @@ namespace Sushi2.Tests
             Assert.AreEqual("caca_jo.txt", "čaČa!.jo.txt".ToFilename());
             Assert.AreEqual("caca_jo.txt", "čaČa.jo.txt".ToFilename(removeDoubledSafeParts: false));
             Assert.AreEqual("caca_.jo.txt", "čaČa!.jo.txt".ToFilename(removeAdditionalDots: false));
+        }
+
+        public enum Robot
+        {
+            [System.ComponentModel.Description("First")]
+            One = 1,
+            [System.ComponentModel.Description("Second")]
+            Two = 2,
+            Three = 3
+        }
+
+        [TestMethod]
+        public void EnumToolsDescription()
+        {
+            Assert.AreEqual("First", EnumTools.GetEnumFieldDescription(Robot.One));
+            Assert.AreNotEqual("First", EnumTools.GetEnumFieldDescription(Robot.Two));
+            Assert.AreEqual("Three", EnumTools.GetEnumFieldDescription(Robot.Three));
+        }
+
+        [TestMethod]
+        public void EnumToolsParse()
+        {
+            Assert.AreEqual(Robot.One, EnumTools.Parse<Robot>("1"));
+            Assert.AreEqual(Robot.One, EnumTools.Parse<Robot>("One"));
+            Assert.AreEqual(Robot.One, EnumTools.Parse<Robot>(Robot.One));
+            Assert.AreEqual(Robot.One, EnumTools.Parse<Robot>(1));
+            Assert.AreEqual(null, EnumTools.Parse<Robot>(4));
         }
     }
 }
