@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Reflection;
 using System.Security.Cryptography;
+using System.Globalization;
 
 namespace Sushi2
 {
@@ -777,6 +778,91 @@ namespace Sushi2
             }
 
             return newFilename;
+        }
+
+        /// <summary>
+		/// Convert string to slug.
+		/// </summary>
+		/// <param name="url">Any string.</param>
+		/// <param name="safePart">Replace unsafe char with this string.</param>
+		/// <param name="maxLength">Max url length.</param>
+        /// <param name="removeDoubledSafeParts">Remove doubled safe parts.</param>
+        /// <param name="smartCutting">Smart cutting.</param>
+		/// <returns>Url friendly string.</returns>
+		public static string ToSlug(this string url, string safePart = "-", int maxLength = 80, bool removeDoubledSafeParts = true, bool smartCutting = true)
+        {
+            if (url == null)
+                throw new ArgumentNullException(nameof(url));
+
+            if (maxLength < 1)
+                throw new ArgumentException("Max length must be greater than 0.", nameof(maxLength));
+
+            var def = "[a-z0-9\\-]";
+
+            url = url.ToLower().Trim().ToStringWithoutDiacritics();
+
+            var result = new StringBuilder();
+            var r = new Regex(def);
+            var cutted = false;
+            var lastSafeIndex = -1;
+
+            for (int i = 0; i < url.Length; i++)
+            {
+                if (i >= maxLength)
+                {
+                    cutted = true;
+                    break;
+                }
+
+                var now = url[i].ToString(CultureInfo.InvariantCulture);
+
+                if (!r.IsMatch(now))
+                {
+                    if (result.Length == 0)
+                        continue;
+
+                    lastSafeIndex = i;
+                    result.Append(safePart);
+                }
+                else
+                {
+                    result.Append(now);
+                }
+            }
+
+            var rx = result.ToString();
+
+            // remove end chars
+            while (rx.Length > 0 &&
+                rx.EndsWith(safePart, StringComparison.OrdinalIgnoreCase))
+            {
+                if (rx.Length - safePart.Length <= 0)
+                    break;
+
+                rx = rx.Substring(0, rx.Length - safePart.Length);
+            }
+
+            // smart cutting
+            if (smartCutting &&
+                cutted &&
+                rx.Length >= maxLength &&
+                lastSafeIndex != -1)
+            {
+                rx = rx.Substring(0, lastSafeIndex);
+            }
+
+            if (removeDoubledSafeParts)
+            {
+                while (rx.IndexOf(safePart + safePart, StringComparison.CurrentCulture) >= 0)
+                {
+                    rx = rx.ToReplacedString(safePart + safePart, safePart, StringComparison.CurrentCulture);
+                }
+            }
+
+            if (string.IsNullOrEmpty(rx))
+                return safePart;
+
+            return rx;
         }
     }
 }

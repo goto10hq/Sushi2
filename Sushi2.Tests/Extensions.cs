@@ -485,5 +485,23 @@ namespace Sushi2.Tests
             Assert.AreEqual(Robot.One, EnumTools.Parse<Robot>(1));
             Assert.AreEqual(null, EnumTools.Parse<Robot>(4));
         }
+
+        [TestMethod]
+        public void ToSlug()
+        {
+            Assert.AreEqual("aaa", "aaa".ToSlug());
+            Assert.AreEqual("aaa", "aAa".ToSlug());
+            Assert.AreEqual("a-3", "a 3".ToSlug());
+            Assert.AreEqual("a_-_3", "a 3".ToSlug("_-_"));
+            Assert.AreEqual("caca--jo-txt", "čaČa!.jo.txt".ToSlug(removeDoubledSafeParts: false));
+            Assert.AreEqual("caca-jo-txt", "čaČa!.jo.txt".ToSlug());
+            Assert.AreEqual("caca-jo-txt", "čaČa.jo.txt".ToSlug(removeDoubledSafeParts: false));
+            Assert.AreEqual("-", "__".ToSlug());
+            Assert.AreEqual("000", "_000_".ToSlug());
+            Assert.AreEqual("hello-hi", "hello hi aloha".ToSlug(maxLength: 10));
+            Assert.AreEqual("hello-hi-aloha", "hello hi aloha".ToSlug(maxLength: 14));
+            Assert.AreEqual("hel", "hello hi aloha".ToSlug(maxLength: 3));
+            Assert.AreEqual("hello-hi-aloha", "!hello hi aloha!".ToSlug());
+        }
     }
 }
