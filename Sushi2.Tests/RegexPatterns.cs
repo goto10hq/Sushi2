@@ -30,7 +30,8 @@ namespace SushiTests
                              { "email.example.com", false },
                              { "plain", false },
                              { "@example.com", false },
-                             { "#@%^%#$@#$@#.com", false }
+                             { "#@%^%#$@#$@#.com", false },
+                             { "robot@yoyo.systems", true }
                          };
 
             foreach (var e in emails)
@@ -111,6 +112,6 @@ namespace SushiTests
             {
                 Assert.AreEqual(g.Value, Regex.IsMatch(g.Key, Sushi2.RegexPatterns.Guid), $"Test failed for {g.Key} which should be {(g.Value ? "valid" : "invalid")}.");
             }
-        }        
+        }
     }
 }
