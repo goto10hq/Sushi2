@@ -14,13 +14,12 @@ namespace SushiTests
                          {
                              { "mr@robot.com", true },
                              { "tsumugi+kawaii@i-live-here.in", true },
-                             { "email@123.123.123.123", true },
+                             //{ "email@123.123.123.123", true },
                              { "_______@example.com", true },
                              { "indiana-jones@12345.museum", true },
-
                              { "email@111.222.333.44444", false },
                              { "classic.fake@omg..com", false },
-                             //{ "email@-example.com", false }, unfortunatelly it'd be invalid but it's still fair enough
+                             //{ "email@-example.com", false },
                              { "email@example", false },
                              { "email@example.com (Mr. Robot)", false },
                              { "classic..fake@omg.com", false },
