@@ -392,7 +392,8 @@ namespace Sushi2
                 }
             }
 
-            return sb.ToString();
+            // special case for russian ь
+            return sb.ToString().Replace("'", "");
         }
 
         /// <summary>

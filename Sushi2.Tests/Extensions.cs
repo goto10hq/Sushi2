@@ -261,6 +261,8 @@ namespace Sushi2.Tests
                             "ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝàáâãäåçèéêëìíîïñòóôõöøùúûüýÿĀāĂăĄąĆćČčĎďĐđĒēĖėĘęĚěĞğĢģĪīĮįİıĶķĹĺĻļĽľŁłŃńŅņŇňŌōŐőŔŕŖŗŘřŚśŞşŠšŢţŤťŪūŮůŰűŲųŸŹźŻżŽžƠơƯư"
                                 .ToStringWithoutDiacritics());
             Assert.AreEqual("ae", "æ".ToStringWithoutDiacritics());
+            Assert.AreEqual("Olga", "Ольга".ToStringWithoutDiacritics());
+            Assert.AreEqual("Tatyana", "Татьяна".ToStringWithoutDiacritics());
         }
 
         [TestMethod]
@@ -502,7 +504,8 @@ namespace Sushi2.Tests
             Assert.AreEqual("hello-hi-aloha", "hello hi aloha".ToSlug(maxLength: 14));
             Assert.AreEqual("hel", "hello hi aloha".ToSlug(maxLength: 3));
             Assert.AreEqual("hello-hi-aloha", "!hello hi aloha!".ToSlug());
-            Assert.AreEqual("stat-i-o-poligrafii-i-pechatnom-dele", "Статьи о полиграфии и печатном деле".ToSlug());
+            Assert.AreEqual("stati-o-poligrafii-i-pechatnom-dele", "Статьи о полиграфии и печатном деле".ToSlug());
+            Assert.AreEqual("olga", "Ольга".ToSlug());
         }
     }
 }
