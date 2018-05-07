@@ -358,33 +358,41 @@ namespace Sushi2
         /// <summary>
         /// Remove all the diacritivs signs with simplified ones.
         /// </summary>
-        /// <param name="s">String.</param>
+        /// <param name="input">Input string.</param>
         /// <returns>Text without any diacritics.</returns>
-        public static string ToStringWithoutDiacritics(this string s)
+        public static string ToStringWithoutDiacritics(this string input)
         {
-            if (s == null)
-                throw new ArgumentNullException(nameof(s));
+            if (input == null)
+                throw new ArgumentNullException(nameof(input));
 
-            const string textWithDiacritic = "ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝàáâãäåçèéêëìíîïñòóôõöøùúûüýÿĀāĂăĄąĆćČčĎďĐđĒēĖėĘęĚěĞğĢģĪīĮįİıĶķĹĺĻļĽľŁłŃńŅņŇňŌōŐőŔŕŖŗŘřŚśŞşŠšŢţŤťŪūŮůŰűŲųŸŹźŻżŽžƠơƯư";
-            const string simplifiedText = "AAAAAACEEEEIIIIDNOOOOOOUUUUYaaaaaaceeeeiiiinoooooouuuuyyAaAaAaCcCcDdDdEeEeEeEeGgGgIiIiIiKkLlLlLlLlNnNnNnOoOoRrRrRrSsSsSsTtTtUuUuUuUuYZzZzZzOoUu";
+            if (string.IsNullOrEmpty(input))
+                return "";
 
-            var result = new StringBuilder(s.Length);
+            if (input.All(x => x < 0x80))
+                return input;
 
-            for (var i = 0; i < s.Length; i++)
+            // result often can be at least two times longer than input string.
+            var sb = new StringBuilder(input.Length * 2);
+
+            foreach (char c in input)
             {
-                var pos = textWithDiacritic.IndexOf(s[i]);
+                if (c < 0x80)
+                {
+                    sb.Append(c);
+                }
+                else
+                {
+                    int high = c >> 8;
+                    int low = c & 0xff;
 
-                result.Append(pos >= 0 ? simplifiedText[pos] : s[i]);
+                    if (Characters.AllCharacters.TryGetValue(high, out string[] transliterations))
+                    {
+                        sb.Append(transliterations[low]);
+                    }
+                }
             }
 
-            s = result.ToString();
-
-            var newStringBuilder = new StringBuilder();
-            newStringBuilder.Append(s.Normalize(NormalizationForm.FormKD)
-                                            .Where(x => x < 128)
-                                            .ToArray());
-
-            return newStringBuilder.ToString();
+            return sb.ToString();
         }
 
         /// <summary>

@@ -255,12 +255,12 @@ namespace Sushi2.Tests
         [TestMethod]
         public void ToStringWithoutDiacritics()
         {
-            //TODO: test æ
             Assert.AreEqual("Prilis zlutoucky kun upel dabelske ody!", "Příliš žluťoučký kůň úpěl ďábelské ódy!".ToStringWithoutDiacritics());
             Assert.AreEqual("azk do kviz xnaca", "ázk do kvíz xnácá".ToStringWithoutDiacritics());
             Assert.AreEqual("AAAAAACEEEEIIIIDNOOOOOOUUUUYaaaaaaceeeeiiiinoooooouuuuyyAaAaAaCcCcDdDdEeEeEeEeGgGgIiIiIiKkLlLlLlLlNnNnNnOoOoRrRrRrSsSsSsTtTtUuUuUuUuYZzZzZzOoUu",
                             "ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝàáâãäåçèéêëìíîïñòóôõöøùúûüýÿĀāĂăĄąĆćČčĎďĐđĒēĖėĘęĚěĞğĢģĪīĮįİıĶķĹĺĻļĽľŁłŃńŅņŇňŌōŐőŔŕŖŗŘřŚśŞşŠšŢţŤťŪūŮůŰűŲųŸŹźŻżŽžƠơƯư"
                                 .ToStringWithoutDiacritics());
+            Assert.AreEqual("ae", "æ".ToStringWithoutDiacritics());
         }
 
         [TestMethod]
@@ -502,6 +502,7 @@ namespace Sushi2.Tests
             Assert.AreEqual("hello-hi-aloha", "hello hi aloha".ToSlug(maxLength: 14));
             Assert.AreEqual("hel", "hello hi aloha".ToSlug(maxLength: 3));
             Assert.AreEqual("hello-hi-aloha", "!hello hi aloha!".ToSlug());
+            Assert.AreEqual("stat-i-o-poligrafii-i-pechatnom-dele", "Статьи о полиграфии и печатном деле".ToSlug());
         }
     }
 }
