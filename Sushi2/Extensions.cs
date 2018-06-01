@@ -873,5 +873,32 @@ namespace Sushi2
 
             return rx;
         }
+
+        /// <summary>
+        /// Converts guid to short guid string.
+        /// </summary>
+        /// <param name="guid">Guid.</param>
+        /// <returns>Short guid.</returns>
+        public static string ToShortGuid(this Guid guid)
+        {
+            string encoded = Convert.ToBase64String(guid.ToByteArray());
+            encoded = encoded.Replace("/", "_").Replace("+", "-").Replace("=", "");
+            return encoded;
+        }
+
+        /// <summary>
+        /// Decodes the given base64 string
+        /// </summary>
+        /// <param name="value">The base64 encoded string of a Guid</param>
+        /// <returns>A new Guid</returns>
+        public static Guid FromShortGuid(this string value)
+        {
+            if (value == null)
+                throw new ArgumentNullException(nameof(value));
+
+            value = value.Replace("_", "/").Replace("-", "+");
+            byte[] buffer = Convert.FromBase64String(value + "==");
+            return new Guid(buffer);
+        }
     }
 }

@@ -507,5 +507,14 @@ namespace Sushi2.Tests
             Assert.AreEqual("stati-o-poligrafii-i-pechatnom-dele", "Статьи о полиграфии и печатном деле".ToSlug());
             Assert.AreEqual("olga", "Ольга".ToSlug());
         }
+
+        [TestMethod]
+        public void ShortGuid()
+        {
+            Assert.AreEqual("45b1_sF00kiU0QIRQ2Jo9Q", new Guid("FEF596E3-74C1-48D2-94D1-0211436268F5").ToShortGuid());
+            Assert.AreEqual(new Guid("FEF596E3-74C1-48D2-94D1-0211436268F5"), "45b1_sF00kiU0QIRQ2Jo9Q".FromShortGuid());
+            Assert.AreEqual("XRayF23_0USI0Nv5mYUwYQ", new Guid("17B2165D-FF6D-44D1-88D0-DBF999853061").ToShortGuid());
+            Assert.AreEqual(new Guid("17B2165D-FF6D-44D1-88D0-DBF999853061"), "XRayF23_0USI0Nv5mYUwYQ".FromShortGuid());
+        }
     }
 }
