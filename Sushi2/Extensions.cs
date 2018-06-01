@@ -887,10 +887,10 @@ namespace Sushi2
         }
 
         /// <summary>
-        /// Decodes the given base64 string
+        /// Converts base64 string to guid.
         /// </summary>
-        /// <param name="value">The base64 encoded string of a Guid</param>
-        /// <returns>A new Guid</returns>
+        /// <param name="value">The base64 encoded string of a guid.</param>
+        /// <returns>A new guid.</returns>
         public static Guid FromShortGuid(this string value)
         {
             if (value == null)

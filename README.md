@@ -1,3 +1,5 @@
+![Sushi2](https://raw.githubusercontent.com/goto10hq/Sushi2/master/sushi-icon.png)
+
 # Sushi2
 > Utility library for cool kids
 
