@@ -907,6 +907,10 @@ namespace Sushi2
             {
                 return null;
             }
+            catch (ArgumentException)
+            {
+                return null;
+            }
         }
     }
 }

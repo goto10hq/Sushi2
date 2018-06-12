@@ -5,8 +5,8 @@ namespace Sushi2
 {
     public static class Cultures
     {
-        private static readonly Lazy<CultureInfo> _en = new Lazy<CultureInfo>(() => new CultureInfo("en-US"));
-        private static readonly Lazy<CultureInfo> _cz = new Lazy<CultureInfo>(() => new CultureInfo("cs-CZ"));
+        static readonly Lazy<CultureInfo> _en = new Lazy<CultureInfo>(() => new CultureInfo("en-US"));
+        static readonly Lazy<CultureInfo> _cz = new Lazy<CultureInfo>(() => new CultureInfo("cs-CZ"));
 
         /// <summary>
         /// Get culture info for EN.
@@ -16,6 +16,6 @@ namespace Sushi2
         /// <summary>
         /// Get culture info for CZ.
         /// </summary>
-        public static CultureInfo Czech => _cz.Value;        	
+        public static CultureInfo Czech => _cz.Value;
     }
 }
