@@ -515,6 +515,15 @@ namespace Sushi2.Tests
             Assert.AreEqual(new Guid("FEF596E3-74C1-48D2-94D1-0211436268F5"), "45b1_sF00kiU0QIRQ2Jo9Q".FromShortGuid());
             Assert.AreEqual("XRayF23_0USI0Nv5mYUwYQ", new Guid("17B2165D-FF6D-44D1-88D0-DBF999853061").ToShortGuid());
             Assert.AreEqual(new Guid("17B2165D-FF6D-44D1-88D0-DBF999853061"), "XRayF23_0USI0Nv5mYUwYQ".FromShortGuid());
+            Assert.IsNull("XRayF23_0USI0Nv5m!!".FromShortGuid());
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException), "Null string was inappropriately allowed.")]
+        public void ShortGuidNullArgument()
+        {
+            string test = null;
+            test.FromShortGuid();
         }
     }
 }
