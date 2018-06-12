@@ -890,15 +890,23 @@ namespace Sushi2
         /// Converts base64 string to guid.
         /// </summary>
         /// <param name="value">The base64 encoded string of a guid.</param>
-        /// <returns>A new guid.</returns>
-        public static Guid FromShortGuid(this string value)
+        /// <returns>A guid or null.</returns>
+        public static Guid? FromShortGuid(this string value)
         {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
 
             value = value.Replace("_", "/").Replace("-", "+");
-            byte[] buffer = Convert.FromBase64String(value + "==");
-            return new Guid(buffer);
+
+            try
+            {
+                byte[] buffer = Convert.FromBase64String(value + "==");
+                return new Guid(buffer);
+            }
+            catch (FormatException)
+            {
+                return null;
+            }
         }
     }
 }
