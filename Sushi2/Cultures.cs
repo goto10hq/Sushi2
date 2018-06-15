@@ -17,5 +17,10 @@ namespace Sushi2
         /// Get culture info for CZ.
         /// </summary>
         public static CultureInfo Czech => _cz.Value;
+
+        /// <summary>
+        /// Get invariant culture.
+        /// </summary>
+        public static CultureInfo Invariant => CultureInfo.InvariantCulture;
     }
 }

@@ -10,11 +10,13 @@
 
 ## Cultures
 
-Small shortcuts for predefined culture info.
+Small shortcuts for predefined culture info. And of course good ol' invariant one.
 
 ```Sushi2.Cultures.Czech```
 
 ```Sushi2.Cultures.English```
+
+```Sushi2.Cultures.Invariant```
 
 ## Enum Tools
 

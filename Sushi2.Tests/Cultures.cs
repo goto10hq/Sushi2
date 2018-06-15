@@ -19,5 +19,11 @@ namespace Sushi2.Tests
             var ci = new CultureInfo("cs-cz");
             Assert.AreEqual(ci.LCID, Sushi2.Cultures.Czech.LCID);
         }
+
+        [TestMethod]
+        public void Invariant()
+        {
+            Assert.AreEqual(CultureInfo.InvariantCulture.LCID, Sushi2.Cultures.Invariant.LCID);
+        }
     }
 }
