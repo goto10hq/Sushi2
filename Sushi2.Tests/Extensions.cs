@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.ComponentModel;
 
 namespace Sushi2.Tests
 {
@@ -94,6 +93,7 @@ namespace Sushi2.Tests
             const long n = long.MaxValue;
 
             Assert.AreEqual(x, "100".ToInt16());
+            Assert.AreEqual(x, "100 ".ToInt16());
             Assert.AreEqual(null, "foo".ToInt16());
             Assert.AreEqual((short)256, r.ToInt16());
             Assert.AreEqual(null, n.ToInt16());
@@ -108,6 +108,7 @@ namespace Sushi2.Tests
             const long n = long.MaxValue;
 
             Assert.AreEqual(x, "100".ToInt32());
+            Assert.AreEqual(x, " 100 ".ToInt32());
             Assert.AreEqual(null, "foo".ToInt32());
             Assert.AreEqual(-256, r.ToInt32());
             Assert.AreEqual(null, n.ToInt32());
@@ -122,6 +123,7 @@ namespace Sushi2.Tests
 
             Thread.CurrentThread.CurrentCulture = Sushi2.Cultures.English;
             Assert.AreEqual(x, "100.001".ToDouble());
+            Assert.AreEqual(x, " 100.001 ".ToDouble());
             Thread.CurrentThread.CurrentCulture = Sushi2.Cultures.Czech;
             Assert.AreEqual(x, "100,001".ToDouble());
             Assert.AreEqual(null, "100.001".ToDouble());
@@ -139,6 +141,7 @@ namespace Sushi2.Tests
             const long n = long.MaxValue;
 
             Assert.AreEqual(x, "100".ToInt64());
+            Assert.AreEqual(x, " 100 ".ToInt64());
             Assert.AreEqual(null, "foo".ToInt64());
             Assert.AreEqual(-256, r.ToInt64());
             Assert.AreEqual(long.MaxValue, n.ToInt64());
@@ -152,6 +155,7 @@ namespace Sushi2.Tests
 
             Thread.CurrentThread.CurrentCulture = Sushi2.Cultures.English;
             Assert.AreEqual(x, "100.001".ToFloat());
+            Assert.AreEqual(x, " 100.001 ".ToFloat());
             Thread.CurrentThread.CurrentCulture = Sushi2.Cultures.Czech;
             Assert.AreEqual(x, "100,001".ToFloat());
             Assert.AreEqual(null, "100.001".ToFloat());
@@ -169,6 +173,7 @@ namespace Sushi2.Tests
 
             Thread.CurrentThread.CurrentCulture = Sushi2.Cultures.English;
             Assert.AreEqual(x, "100.001".ToDecimal());
+            Assert.AreEqual(x, " 100.001 ".ToDecimal());
             Thread.CurrentThread.CurrentCulture = Sushi2.Cultures.Czech;
             Assert.AreEqual(x, "100,001".ToDecimal());
             Assert.AreEqual(null, "100.001".ToDecimal());
@@ -236,7 +241,9 @@ namespace Sushi2.Tests
         {
             Assert.AreEqual(true, "true".ToBoolean());
             Assert.AreEqual(true, "True".ToBoolean());
+            Assert.AreEqual(true, " True ".ToBoolean());
             Assert.AreEqual(true, "1".ToBoolean());
+            Assert.AreEqual(true, " 1 ".ToBoolean());
             Assert.AreEqual(false, "false".ToBoolean());
             Assert.AreEqual(false, "FALSE".ToBoolean());
             Assert.AreEqual(false, "0".ToBoolean());

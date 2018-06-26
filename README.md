@@ -57,6 +57,20 @@ EnumTools.Parse<Robot>("foo", Robot.One); // this one fails, def value is return
 
 All the calls return ``Robot.One``.
 
+## Extensions
+
+### string ToDbString(this string text)
+
+Returns trimmed string and never null.
+
+```csharp
+"   foo ".ToDbString()
+```
+
+```
+foo
+```
+
 ## History
 
 Based on various tools, helpers, ... I've been building since .NET beta packed in library called **Sushi**. 
