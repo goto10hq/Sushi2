@@ -18,6 +18,8 @@ Small shortcuts for predefined culture info. And of course good ol' invariant on
 
 ```Sushi2.Cultures.Invariant```
 
+```Sushi2.Cultures.Current```
+
 ## Enum Tools
 
 Enum helper methods.

@@ -912,5 +912,23 @@ namespace Sushi2
                 return null;
             }
         }
+
+        /// <summary>
+		/// Convert to human readable file size.
+		/// </summary>
+		/// <param name="size">Size in bytes.</param>
+		/// <returns>Human readable string.</returns>
+		public static FileSize ToFileSize(this int size) => ((long)size).ToFileSize();
+
+        /// <summary>
+        /// Convert to human readable file size.
+        /// </summary>
+        /// <param name="size">Size in bytes.</param>
+        /// <returns>FileSize object.</returns>
+        public static FileSize ToFileSize(this long size)
+        {
+            var fs = new FileSize(size);
+            return fs;
+        }
     }
 }

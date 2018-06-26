@@ -22,5 +22,10 @@ namespace Sushi2
         /// Get invariant culture.
         /// </summary>
         public static CultureInfo Invariant => CultureInfo.InvariantCulture;
+
+        /// <summary>
+        /// Get current culture.
+        /// </summary>
+        public static CultureInfo Current => CultureInfo.CurrentCulture;
     }
 }

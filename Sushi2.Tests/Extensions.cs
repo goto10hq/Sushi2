@@ -533,5 +533,88 @@ namespace Sushi2.Tests
             string test = null;
             test.FromShortGuid();
         }
+
+        [TestMethod]
+        public void FileSize()
+        {
+            var total = 1024 * 1024 * 1024 * 1 + 1024 * 1024 * 780 + 1024 * 2 + 5;
+            var fs = total.ToFileSize();
+            Assert.AreEqual(total, fs.Size);
+
+            Assert.AreEqual(0, fs.Exabytes);
+            Assert.AreEqual(0, fs.Petabytes);
+            Assert.AreEqual(0, fs.Terabytes);
+            Assert.AreEqual(1, fs.Gigabytes);
+            Assert.AreEqual(780, fs.Megabytes);
+            Assert.AreEqual(2, fs.Kilobytes);
+            Assert.AreEqual(5, fs.Bytes);
+
+            Assert.AreEqual(0, fs.TotalExabytes);
+            Assert.AreEqual(0, fs.TotalPetabytes);
+            Assert.AreEqual(0, fs.TotalTerabytes);
+            Assert.AreEqual(1.762, Math.Round(fs.TotalGigabytes, 3));
+            Assert.AreEqual(0, fs.TotalMegabytes);
+            Assert.AreEqual(0, fs.TotalKilobytes);
+            Assert.AreEqual(0, fs.TotalBytes);
+
+            Assert.AreEqual("1.762 GB", fs.ToString(Sushi2.FileSize.Format.Brief, Sushi2.Cultures.English));
+            Assert.AreEqual("1 GB 780 MB 2 KB 5 B", fs.ToString(Sushi2.FileSize.Format.Detail, Sushi2.Cultures.English));
+        }
+
+        [TestMethod]
+        public void ZeroFileSize()
+        {
+            var total = 0;
+            var fs = total.ToFileSize();
+            Assert.AreEqual(total, fs.Size);
+
+            Assert.AreEqual(0, fs.Exabytes);
+            Assert.AreEqual(0, fs.Petabytes);
+            Assert.AreEqual(0, fs.Terabytes);
+            Assert.AreEqual(0, fs.Gigabytes);
+            Assert.AreEqual(0, fs.Megabytes);
+            Assert.AreEqual(0, fs.Kilobytes);
+            Assert.AreEqual(0, fs.Bytes);
+
+            Assert.AreEqual(0, fs.TotalExabytes);
+            Assert.AreEqual(0, fs.TotalPetabytes);
+            Assert.AreEqual(0, fs.TotalTerabytes);
+            Assert.AreEqual(0, 0);
+            Assert.AreEqual(0, fs.TotalMegabytes);
+            Assert.AreEqual(0, fs.TotalKilobytes);
+            Assert.AreEqual(0, fs.TotalBytes);
+
+            Assert.AreEqual("0 B", fs.ToString(Sushi2.FileSize.Format.Brief, Sushi2.Cultures.English));
+            Assert.AreEqual("0 B", fs.ToString(Sushi2.FileSize.Format.Detail, Sushi2.Cultures.English));
+        }
+
+        [TestMethod]
+        public void NegativeFileSize()
+        {
+            var total = 1024 * 1024 * 1024 * 1 + 1024 * 1024 * 780 + 1024 * 2 + 0;
+            total *= -1;
+
+            var fs = total.ToFileSize();
+            Assert.AreEqual(total, fs.Size);
+
+            Assert.AreEqual(0, fs.Exabytes);
+            Assert.AreEqual(0, fs.Petabytes);
+            Assert.AreEqual(0, fs.Terabytes);
+            Assert.AreEqual(1, fs.Gigabytes);
+            Assert.AreEqual(780, fs.Megabytes);
+            Assert.AreEqual(2, fs.Kilobytes);
+            Assert.AreEqual(0, fs.Bytes);
+
+            Assert.AreEqual(0, fs.TotalExabytes);
+            Assert.AreEqual(0, fs.TotalPetabytes);
+            Assert.AreEqual(0, fs.TotalTerabytes);
+            Assert.AreEqual(1.762, Math.Round(fs.TotalGigabytes, 3));
+            Assert.AreEqual(0, fs.TotalMegabytes);
+            Assert.AreEqual(0, fs.TotalKilobytes);
+            Assert.AreEqual(0, fs.TotalBytes);
+
+            Assert.AreEqual("-1.762 GB", fs.ToString(Sushi2.FileSize.Format.Brief, Sushi2.Cultures.English));
+            Assert.AreEqual("-1 GB -780 MB -2 KB 0 B", fs.ToString(Sushi2.FileSize.Format.Detail, Sushi2.Cultures.English));
+        }
     }
 }
