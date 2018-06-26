@@ -8,6 +8,8 @@
 [![NuGet](https://img.shields.io/nuget/dt/Sushi2.svg?style=flat-square)](https://www.nuget.org/packages/Sushi2/)
 [![Visual Studio Team services](https://img.shields.io/vso/build/frohikey/c3964e53-4bf3-417a-a96e-661031ef862f/117.svg?style=flat-square)](https://github.com/goto10hq/Sushi2)
 
+_Slowly and steady I'm updating doc here..._
+
 ## Cultures
 
 Small shortcuts for predefined culture info. And of course good ol' invariant one.
