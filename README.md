@@ -1,6 +1,7 @@
 ![Sushi2](https://raw.githubusercontent.com/goto10hq/Sushi2/master/sushi-icon.png)
 
 # Sushi2
+
 > Utility library for cool kids
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
@@ -12,7 +13,7 @@ _Slowly and steady I'm updating doc here..._
 
 ## Cultures
 
-Small shortcuts for predefined culture info. And of course good ol' invariant one.
+Small shortcuts for predefined culture info. And of course good ol' invariant/current ones.
 
 ```Sushi2.Cultures.Czech```
 
@@ -37,11 +38,11 @@ public enum Robot
 }
 ```
 
-### GetEnumFieldDescription(Enum field)
-### GetEnumFieldDescription(Enum field, string zeroValueName)
+### string GetEnumFieldDescription(Enum field)
+### string GetEnumFieldDescription(Enum field, string zeroValueName)
 
 ```csharp
-Console.WriteLine(EnumTools.GetEnumFieldDescription(Robot.One));
+EnumTools.GetEnumFieldDescription(Robot.One);
 ```
 
 ```
@@ -59,7 +60,13 @@ EnumTools.Parse<Robot>(1);
 EnumTools.Parse<Robot>("foo", Robot.One); // this one fails, def value is returned
 ```
 
-All the calls return ``Robot.One``.
+```
+Robot.One
+Robot.One
+Robot.One
+Robot.One
+Robot.One
+```
 
 ## Extensions
 
@@ -73,6 +80,18 @@ Returns trimmed string and never null.
 
 ```
 foo
+```
+
+### string ToNormalizedString(this string text)
+
+Returns trimmed, lower-cased string without diacritics chars. Oh yeah and never null value.
+
+```csharp
+" Žluťoučký ".ToNormalizedString()
+```
+
+```
+zlutoucky
 ```
 
 ## History
