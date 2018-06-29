@@ -524,6 +524,9 @@ namespace Sushi2.Tests
             Assert.AreEqual(new Guid("17B2165D-FF6D-44D1-88D0-DBF999853061"), "XRayF23_0USI0Nv5mYUwYQ".FromShortGuid());
             Assert.IsNull("XRayF23_0USI0Nv5m!!".FromShortGuid());
             Assert.IsNull("xx".FromShortGuid());
+
+            for (var i = 0; i < 10000; i++)
+                Assert.AreEqual(22, new Guid().ToShortGuid().Length);
         }
 
         [TestMethod]
