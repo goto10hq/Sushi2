@@ -6,8 +6,8 @@ namespace Sushi2
 {
     public static class AsyncTools
     {
-        private static readonly Lazy<TaskFactory> _taskFactory = new Lazy<TaskFactory>(() => new TaskFactory(CancellationToken.None, TaskCreationOptions.None, TaskContinuationOptions.None, TaskScheduler.Default));
-        private static TaskFactory MyTaskFactory => _taskFactory.Value;
+        static readonly Lazy<TaskFactory> _taskFactory = new Lazy<TaskFactory>(() => new TaskFactory(CancellationToken.None, TaskCreationOptions.None, TaskContinuationOptions.None, TaskScheduler.Default));
+        static TaskFactory MyTaskFactory => _taskFactory.Value;
 
         /// <summary>
         /// Run sync.
