@@ -92,7 +92,7 @@ namespace SushiTests
         }
 
         [TestMethod]
-        public void Guid()
+        public void GuidTest()
         {
             var guids = new Dictionary<string, bool>
                          {

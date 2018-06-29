@@ -56,7 +56,7 @@ namespace Sushi2.Tests
             Thread.CurrentThread.CurrentCulture = Sushi2.Cultures.English;
             var sorted = texts.Select(x => x).OrderBy(x => x.ToSortedString()).ToList();
             Thread.CurrentThread.CurrentCulture = Sushi2.Cultures.Czech;
-            var linqSorted = texts.OrderBy(x => x.ToLower()).ToList();
+            var linqSorted = texts.OrderBy(x => x.ToLower(Sushi2.Cultures.Czech)).ToList();
 
             for (var i = 0; i < sorted.Count; i++)
             {
@@ -306,7 +306,8 @@ namespace Sushi2.Tests
             filename.ToMimeType();
         }
 
-        public class SmartTag : Attribute
+        [AttributeUsage(AttributeTargets.All)]
+        class SmartTag : Attribute
         {
             public string Foo { get; }
 
@@ -316,7 +317,8 @@ namespace Sushi2.Tests
             }
         }
 
-        public class FooTag : Attribute
+        [AttributeUsage(AttributeTargets.All)]
+        class FooTag : Attribute
         {
             public string Foo { get; }
         }

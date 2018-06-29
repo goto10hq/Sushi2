@@ -39,8 +39,12 @@ namespace Sushi2
 
         static readonly Dictionary<HashType, Func<string, Encoding, string>> _algorithms = new Dictionary<HashType, Func<string, Encoding, string>>
         {
+#pragma warning disable CS0618 // Type or member is obsolete
             { HashType.MD5, GetMD5 },
+#pragma warning restore CS0618 // Type or member is obsolete
+#pragma warning disable CS0618 // Type or member is obsolete
             { HashType.SHA1, GetSHA1 },
+#pragma warning restore CS0618 // Type or member is obsolete
             { HashType.SHA256, GetSHA256 },
             { HashType.SHA384, GetSHA384 },
             { HashType.SHA512, GetSHA512 }

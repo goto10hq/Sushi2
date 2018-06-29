@@ -808,7 +808,7 @@ namespace Sushi2
 
             var def = "[a-z0-9\\-]";
 
-            url = url.ToLower().Trim().ToStringWithoutDiacritics();
+            url = url.ToNormalizedString();
 
             var result = new StringBuilder();
             var r = new Regex(def);

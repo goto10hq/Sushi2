@@ -22,7 +22,7 @@ namespace Sushi2
 				3 // 3 syllable words
 			};
 
-        private static readonly int _combinedSyllableWeights;        
+        private static readonly int _combinedSyllableWeights;
 
         static RandomWordGenerator()
         {
@@ -34,12 +34,12 @@ namespace Sushi2
             }
         }
 
-        private static readonly char[] _vowels =
+        static readonly char[] _vowels =
             {
                 'a', 'e', 'i', 'o', 'u', 'y'
             };
 
-        private static readonly string[] _complexVowels =
+        static readonly string[] _complexVowels =
             {
                 "ai", "au",
                 "ea", "ee",
@@ -80,7 +80,7 @@ namespace Sushi2
                 "dge",
                 "fe", "ff", "ft",
                 "ght", "gh",
-				"ke",
+                "ke",
                 "ld", "ll",
                 "nd", "ng", "nk", "nt",
                 "mg", "mp",
@@ -108,7 +108,7 @@ namespace Sushi2
                 'b'
             };
 
-        private static readonly Random _rand = new Random();        
+        private static readonly Random _rand = new Random();
 
         public static string GetWord()
         {
@@ -129,7 +129,7 @@ namespace Sushi2
             }
 
             return GetWord(syllables);
-        }        
+        }
 
         public static string GetWord(int syllables)
         {
@@ -155,7 +155,7 @@ namespace Sushi2
                 //if(i > 0) word += "-";
                 word += syllable;
                 lastSyllable = syllable;
-            }            
+            }
 
             return word;
         }
@@ -251,7 +251,7 @@ namespace Sushi2
             }
 
             return syllable;
-        }       
+        }
     }
 
     internal static class RandomWordExtensions
