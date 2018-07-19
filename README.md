@@ -95,16 +95,16 @@ Returns trimmed, lower-cased string without diacritics chars. Oh yeah and never 
 zlutoucky kun
 ```
 
-### string ToSortedString(this string text)
+### string ToCzechSortedString(this string text)
 
 Returns normalized string usable for sorting operations for Czech language. Usable in cases when you cannot use a culture specific algorithm (DocumentDB etc.).
 
 ```csharp
-" Žluťoučký kůň ".ToSortedString()
+"Žluťoučký kůň".ToSortedString()
 ```
 
 ```
-zzluu*oud*kz* kv1o*
+zbluau*ouad*kz* kuco*
 ```
 
 ## History
