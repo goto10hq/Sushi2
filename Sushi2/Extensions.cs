@@ -40,49 +40,58 @@ namespace Sushi2
         /// </summary>
         /// <param name="text">Text.</param>
         /// <returns>Sort text.</returns>
-        public static string ToSortedString(this string text)
+        public static string ToCzechSortedString(this string text)
         {
-            var t = text.ToDbString().ToLower();
+            if (text == null)
+                throw new ArgumentNullException(nameof(text));
+
+            text = text.ToLower(Cultures.Czech);
 
             // ch is special case
-            t = t.Replace("ch", "i*");
+            text = text.Replace("ch", "i*");
 
             var result = string.Empty;
 
-            foreach (var c in t)
+            foreach (var c in text)
             {
-                var s = c.ToString();
+                var s = c.ToString(Cultures.Current);
                 var norm = s.ToStringWithoutDiacritics();
 
                 if (s.Equals(norm))
                 {
-                    result += s;
+                    if (s.Equals("e"))
+                        result += "ea";
+                    if (s.Equals("z"))
+                        result += "za";
+                    else if (s.Equals("u"))
+                        result += "ua";
+                    else
+                        result += s;
                 }
                 else
                 {
-                    // special case for ž and ě and ů
-                    // not 100% correct for ž but unable to find char to be order "after z"
-                    // on the other hand not a problem from any existing czech word
                     switch (s)
                     {
+                        // https://cs.wikipedia.org/wiki/Abecedn%C3%AD_%C5%99azen%C3%AD
+                        // basically it's almost impossible to make make it 100% without comparing existing strings :(
                         case "ž":
-                            result += "zz";
+                            result += "zb";
                             break;
 
-                        case "e":
-                            result += "f0";
+                        case "é":
+                            result += "eb";
                             break;
 
                         case "ě":
-                            result += "f1";
+                            result += "ec";
                             break;
 
                         case "ú":
-                            result += "v0";
+                            result += "ub";
                             break;
 
                         case "ů":
-                            result += "v1";
+                            result += "uc";
                             break;
 
                         default:

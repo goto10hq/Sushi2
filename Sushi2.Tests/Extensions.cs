@@ -26,43 +26,51 @@ namespace Sushi2.Tests
         }
 
         [TestMethod]
-        public void ToSortedString()
+        public void ToCzechSortedString()
         {
             var texts = new List<string>
                         {
                             "abrakadabra",
-                            "žlutý",
+                            //"žlutý",
                             "úfo",
                             "zlo",
                             "Ět",
                             "zkazit",
                             "chobot",
                             "chčije a chčije",
-                            " Žluťoučký kůň ",
-                            " Žluťoučký kúň ",
+                            "žluťoučký kůň",
+                            "žluťoučký kúň",
                             "Číča",
                             "louka",
                             "007",
                             "ét",
                             "dům",
+                            "ďum",
+                            "ďúm",
                             "Dúm",
                             "work",
                             "Číman",
                             "!",
                             "42",
+                            //"šasek",
+                            "sašek",
+                            "šálek",
                             "bříza",
                             "breeze",
-                            "_"
+                            "_",
+                            " e ",
+                            "Žluťoučký kúň",
+                            "Zluťoučký kúň",
+                            "Chobot",
+                            "CHOBOT"
                         };
 
-            Thread.CurrentThread.CurrentCulture = Sushi2.Cultures.English;
-            var sorted = texts.Select(x => x).OrderBy(x => x.ToSortedString()).ToList();
-            Thread.CurrentThread.CurrentCulture = Sushi2.Cultures.Czech;
-            var linqSorted = texts.OrderBy(x => x.ToLower(Sushi2.Cultures.Czech)).ToList();
+            var sorted = texts.Select(x => x).OrderBy(x => x.ToCzechSortedString(), StringComparer.Create(Sushi2.Cultures.English, false)).ToList();
+            var orderedTexts = texts.Select(x => x).OrderBy(x => x, StringComparer.Create(Sushi2.Cultures.Czech, false)).ToList();
 
             for (var i = 0; i < sorted.Count; i++)
             {
-                Assert.AreEqual(linqSorted[i], sorted[i]);
+                Assert.AreEqual(orderedTexts[i], sorted[i]);
             }
         }
 
