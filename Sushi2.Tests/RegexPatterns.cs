@@ -2,7 +2,7 @@
 using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace SushiTests
+namespace Sushi2.Tests
 {
     [TestClass]
     public class RegexPatterns

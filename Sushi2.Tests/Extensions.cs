@@ -38,6 +38,8 @@ namespace Sushi2.Tests
                             "zkazit",
                             "chobot",
                             "chčije a chčije",
+                            " Žluťoučký kůň ",
+                            " Žluťoučký kúň ",
                             "Číča",
                             "louka",
                             "007",

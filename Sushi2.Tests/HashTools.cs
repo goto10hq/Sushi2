@@ -2,7 +2,7 @@
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace SushiTests
+namespace Sushi2.Tests
 {
     [TestClass]
     public class HashTools
@@ -18,7 +18,7 @@ namespace SushiTests
         public void Sha256WithAsciiEncoding()
         {
             var hash = Sushi2.HashTools.GetHash("žluťoučký", Sushi2.HashTools.HashType.SHA256, Encoding.ASCII);
-            Assert.AreEqual("e9a581eb9201da5644e8fd13eb1705e2c0020fb565e4e4f67a6814c2e4cf909b", hash);            
+            Assert.AreEqual("e9a581eb9201da5644e8fd13eb1705e2c0020fb565e4e4f67a6814c2e4cf909b", hash);
         }
 
         [TestMethod]

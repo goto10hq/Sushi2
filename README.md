@@ -88,11 +88,23 @@ foo
 Returns trimmed, lower-cased string without diacritics chars. Oh yeah and never null value.
 
 ```csharp
-" Žluťoučký ".ToNormalizedString()
+" Žluťoučký kůň ".ToNormalizedString()
 ```
 
 ```
-zlutoucky
+zlutoucky kun
+```
+
+### string ToSortedString(this string text)
+
+Returns normalized string usable for sorting operations for Czech language. Usable in cases when you cannot use a culture specific algorithm (DocumentDB etc.).
+
+```csharp
+" Žluťoučký kůň ".ToSortedString()
+```
+
+```
+zzluu*oud*kz* kv1o*
 ```
 
 ## History
