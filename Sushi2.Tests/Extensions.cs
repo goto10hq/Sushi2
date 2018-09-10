@@ -63,7 +63,7 @@ namespace Sushi2.Tests
                             "Zluťoučký kúň",
                             "Chobot",
                             "CHOBOT",
-                            "what`s that?"
+                            "Joker´s bar"
                         };
 
             var sorted = texts.Select(x => x).OrderBy(x => x.ToCzechSortedString(), StringComparer.Create(Sushi2.Cultures.English, false)).ToList();

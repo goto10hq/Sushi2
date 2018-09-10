@@ -95,6 +95,9 @@ namespace Sushi2
                             break;
 
                         default:
+                            if (string.IsNullOrEmpty(norm))
+                                break;
+
                             result += (char)(Convert.ToChar(norm) + 1);
                             result += "*";
                             break;
