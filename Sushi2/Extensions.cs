@@ -766,13 +766,13 @@ namespace Sushi2
             }
 
             var sb = new StringBuilder();
-            var newFilename = fileName.ToStringWithoutDiacritics().ToLower().Trim();
+            var newFilename = fileName.ToNormalizedString();
 
             foreach (var t in newFilename)
             {
                 var r = new Regex("[qwertyuiopasdfghjklzxcvbnm0123456789_\\-\\.]", RegexOptions.IgnoreCase);
 
-                if (!r.IsMatch(t.ToString()))
+                if (!r.IsMatch(t.ToString(Cultures.Invariant)))
                     sb.Append(safePart);
                 else
                     sb.Append(t);
