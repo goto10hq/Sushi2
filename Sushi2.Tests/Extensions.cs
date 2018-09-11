@@ -632,5 +632,29 @@ namespace Sushi2.Tests
             Assert.AreEqual("-1.762 GB", fs.ToString(Sushi2.FileSize.Format.Brief, Sushi2.Cultures.English));
             Assert.AreEqual("-1 GB -780 MB -2 KB 0 B", fs.ToString(Sushi2.FileSize.Format.Detail, Sushi2.Cultures.English));
         }
+        [TestMethod]
+        public void ToShortenedString()
+        {
+            string x = null;
+
+            Assert.ThrowsException<ArgumentNullException>(() => x.ToShortenedString(10));
+            Assert.ThrowsException<ArgumentException>(() => "bar".ToShortenedString(-1));
+
+            Assert.AreEqual("foo", "foo".ToShortenedString(3));
+            Assert.AreEqual("foo", "foo".ToShortenedString(30));
+            Assert.AreEqual("f...", "foo".ToShortenedString(1));
+            Assert.AreEqual("...", "foo".ToShortenedString(0));
+            Assert.AreEqual("fo...", "foo".ToShortenedString(2));
+            Assert.AreEqual("f?", "foo".ToShortenedString(1, true, "?"));
+            Assert.AreEqual("?", "foo".ToShortenedString(0, true, "?"));
+            Assert.AreEqual("aloha...", "aloha everyone".ToShortenedString(6));
+            Assert.AreEqual("aloha...", "aloha everyone".ToShortenedString(7));
+            Assert.AreEqual("aloha...", "aloha everyone".ToShortenedString(8));
+            Assert.AreEqual("aloha...", "aloha everyone".ToShortenedString(9));
+            Assert.AreEqual("aloha...", " aloha everyone".ToShortenedString(10));
+            Assert.AreEqual("aloha ever...", "aloha everyone".ToShortenedString(10, false));
+            Assert.AreEqual("aloha everyone", "aloha everyone".ToShortenedString(15));
+            Assert.AreEqual("aloha everyone", "aloha everyone".ToShortenedString(15, false));
+        }
     }
 }

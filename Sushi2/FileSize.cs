@@ -4,37 +4,102 @@ using System.Text;
 
 namespace Sushi2
 {
+    /// <summary>
+    /// File size information.
+    /// </summary>
     public sealed class FileSize
     {
+        /// <summary>
+        /// Format type.
+        /// </summary>
         public enum Format
         {
             Brief,
             Detail
         }
 
-        const int OneKilo = 1024;
-
         int _numberOfUnits => _units.Length;
         readonly string[] _units = { "B", "KB", "MB", "GB", "TB", "PB", "EB" };
 
+        /// <summary>
+        /// Get bytes.
+        /// </summary>
         public long Bytes { get; private set; }
+
+        /// <summary>
+        /// Get kilobytes.
+        /// </summary>
         public long Kilobytes { get; private set; }
+
+        /// <summary>
+        /// Get megabytes.
+        /// </summary>
         public long Megabytes { get; private set; }
+
+        /// <summary>
+        /// Get gigabytes.
+        /// </summary>
         public long Gigabytes { get; private set; }
+
+        /// <summary>
+        /// Get terabytes.
+        /// </summary>
         public long Terabytes { get; private set; }
+
+        /// <summary>
+        /// Get petabytes.
+        /// </summary>
         public long Petabytes { get; private set; }
+
+        /// <summary>
+        /// Get exabytes.
+        /// </summary>
         public long Exabytes { get; private set; }
 
+        /// <summary>
+        /// Get total bytes.
+        /// </summary>
         public double TotalBytes { get; private set; }
+
+        /// <summary>
+        /// Get total kilobytes.
+        /// </summary>
         public double TotalKilobytes { get; private set; }
+
+        /// <summary>
+        /// Get total megabytes.
+        /// </summary>
         public double TotalMegabytes { get; private set; }
+
+        /// <summary>
+        /// Get total gigabytes.
+        /// </summary>
         public double TotalGigabytes { get; private set; }
+
+        /// <summary>
+        /// Get total terabytes.
+        /// </summary>
         public double TotalTerabytes { get; private set; }
+
+        /// <summary>
+        /// Get total petabytes.
+        /// </summary>
         public double TotalPetabytes { get; private set; }
+
+        /// <summary>
+        /// Get total exabytes.
+        /// </summary>
         public double TotalExabytes { get; private set; }
 
+        /// <summary>
+        /// Size in bytes.
+        /// </summary>
         public readonly long Size;
 
+        /// <summary>
+        /// Ctor.
+        /// </summary>
+        /// <param name="totalBytes">Total bytes.</param>
         public FileSize(long totalBytes)
         {
             Size = totalBytes;
@@ -144,11 +209,21 @@ namespace Sushi2
             }
         }
 
+        /// <summary>
+        /// Format as a string.
+        /// </summary>
+        /// <returns>Formatted string.</returns>
         public override string ToString()
         {
             return ToString(Format.Brief, Cultures.Current);
         }
 
+        /// <summary>
+        /// Format as a string.
+        /// </summary>
+        /// <param name="format">Format type.</param>
+        /// <param name="cultureInfo">Culture info.</param>
+        /// <returns>Formatted string.</returns>
         public string ToString(Format format, CultureInfo cultureInfo = null)
         {
             if (cultureInfo == null)
@@ -183,7 +258,9 @@ namespace Sushi2
 
                         if (l != 0 &&
                             Size < 0)
+                        {
                             sb.Append("-");
+                        }
 
                         sb.Append(l.ToString(cultureInfo));
                         sb.Append(" ");

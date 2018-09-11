@@ -32,7 +32,7 @@ namespace Sushi2
         /// <returns>Normalized text.</returns>
         public static string ToNormalizedString(this string text)
         {
-            return text.ToDbString().ToStringWithoutDiacritics().ToLower();
+            return text.ToDbString().ToStringWithoutDiacritics().ToLower(Cultures.Invariant);
         }
 
         /// <summary>
@@ -57,13 +57,13 @@ namespace Sushi2
                 var s = c.ToString(Cultures.Current);
                 var norm = s.ToStringWithoutDiacritics();
 
-                if (s.Equals(norm))
+                if (s.Equals(norm, StringComparison.Ordinal))
                 {
-                    if (s.Equals("e"))
+                    if (s.Equals("e", StringComparison.Ordinal))
                         result += "ea";
-                    if (s.Equals("z"))
+                    if (s.Equals("z", StringComparison.Ordinal))
                         result += "za";
-                    else if (s.Equals("u"))
+                    else if (s.Equals("u", StringComparison.Ordinal))
                         result += "ua";
                     else
                         result += s;
@@ -98,7 +98,7 @@ namespace Sushi2
                             if (string.IsNullOrEmpty(norm))
                                 break;
 
-                            result += (char)(Convert.ToChar(norm) + 1);
+                            result += (char)(Convert.ToChar(norm, Cultures.Czech) + 1);
                             result += "*";
                             break;
                     }
@@ -937,10 +937,48 @@ namespace Sushi2
         /// </summary>
         /// <param name="size">Size in bytes.</param>
         /// <returns>FileSize object.</returns>
-        public static FileSize ToFileSize(this long size)
+        public static FileSize ToFileSize(this long size) => new FileSize(size);
+
+        /// <summary>
+        /// Shorten string and add ... if needed.
+        /// </summary>
+        /// <param name="text">Original text.</param>
+        /// <param name="maxSize">Max size of the text.</param>
+        /// <param name="wholeWordsOnly">Whole words are returned only.</param>
+        /// <param name="postfix">Postfix.</param>
+        /// <returns>Shortened string.</returns>
+        public static string ToShortenedString(this string text, int maxSize, bool wholeWordsOnly = true, string postfix = "...")
         {
-            var fs = new FileSize(size);
-            return fs;
+            if (text == null)
+                throw new ArgumentNullException(nameof(text));
+
+            if (maxSize < 0)
+                throw new ArgumentException("Max size must be 0 or greater.", nameof(maxSize));
+
+            if (text?.Length == 0 ||
+                maxSize == 0)
+            {
+                return postfix;
+            }
+
+            if (text.Length > maxSize)
+            {
+                if (wholeWordsOnly)
+                {
+                    int idx = text.Substring(0, maxSize - 1).LastIndexOf(" ", StringComparison.Ordinal);
+
+                    if (idx == -1)
+                        idx = maxSize;
+
+                    text = text.Substring(0, idx).Trim() + postfix;
+                }
+                else
+                {
+                    text = text.Substring(0, maxSize).Trim() + postfix;
+                }
+            }
+
+            return text;
         }
     }
 }

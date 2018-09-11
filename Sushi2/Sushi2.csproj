@@ -16,6 +16,7 @@
     <Company>Goto10</Company>
     <RepositoryUrl>https://github.com/goto10hq/Sushi2</RepositoryUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/goto10hq/Sushi2/master/sushi-icon.png</PackageIconUrl>
+    <CodeAnalysisRuleSet>../Rulez.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <ItemGroup>
