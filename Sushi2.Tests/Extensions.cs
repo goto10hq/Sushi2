@@ -632,6 +632,7 @@ namespace Sushi2.Tests
             Assert.AreEqual("-1.762 GB", fs.ToString(Sushi2.FileSize.Format.Brief, Sushi2.Cultures.English));
             Assert.AreEqual("-1 GB -780 MB -2 KB 0 B", fs.ToString(Sushi2.FileSize.Format.Detail, Sushi2.Cultures.English));
         }
+
         [TestMethod]
         public void ToShortenedString()
         {
@@ -656,5 +657,34 @@ namespace Sushi2.Tests
             Assert.AreEqual("aloha everyone", "aloha everyone".ToShortenedString(15));
             Assert.AreEqual("aloha everyone", "aloha everyone".ToShortenedString(15, false));
         }
+
+        [TestMethod]
+        public void ToCzechNonBreakingSpacesString()
+        {
+            Assert.AreEqual("Ferda a&nbsp;mravenec", "Ferda a mravenec".ToCzechNonBreakingSpacesString());
+            Assert.AreEqual("Ferda a_mravenec", "Ferda a mravenec".ToCzechNonBreakingSpacesString("_"));
+            Assert.AreEqual("Dr.&nbsp;Ferda mravenec", "Dr. Ferda mravenec".ToCzechNonBreakingSpacesString());
+            Assert.AreEqual("F.&nbsp;Mravenec", "F. Mravenec".ToCzechNonBreakingSpacesString());
+            Assert.AreEqual("p.&nbsp;Mravenec", "p. Mravenec".ToCzechNonBreakingSpacesString());
+            Assert.AreEqual("30&nbsp;kg", "30 kg".ToCzechNonBreakingSpacesString());
+            Assert.AreEqual("15.&nbsp;km", "15. km".ToCzechNonBreakingSpacesString());
+            Assert.AreEqual("tab.&nbsp;7, a.&nbsp;s.", "tab. 7, a. s.".ToCzechNonBreakingSpacesString());
+            Assert.AreEqual("Ano. Ferda.", "Ano. Ferda.".ToCzechNonBreakingSpacesString());
+            Assert.AreEqual("dojel do Prahy. Novák byl", "dojel do Prahy. Novák byl".ToCzechNonBreakingSpacesString());
+            Assert.AreEqual("15~%", "15 %".ToCzechNonBreakingSpacesString("~"));
+            Assert.AreEqual("5.~díl", "5. díl".ToCzechNonBreakingSpacesString("~"));
+            Assert.AreEqual("Bylo jich 5. Další věta.", "Bylo jich 5. Další věta.".ToCzechNonBreakingSpacesString("~"));
+            Assert.AreEqual("tab.~7", "tab. 7".ToCzechNonBreakingSpacesString("~"));
+            Assert.AreEqual("6.~1.", "6. 1.".ToCzechNonBreakingSpacesString("~"));
+            Assert.AreEqual("30.~12.~2015", "30. 12. 2015".ToCzechNonBreakingSpacesString("~"));
+            Assert.AreEqual("foo k~s~v~z~a~i~o~u~bar", "foo k s v z a i o u bar".ToCzechNonBreakingSpacesString("~"));
+            Assert.AreEqual("foo K~S~V~Z~A~I~O~U~bar", "foo K S V Z A I O U bar".ToCzechNonBreakingSpacesString("~"));
+            Assert.AreEqual("foo~- bar", "foo - bar".ToCzechNonBreakingSpacesString("~"));
+            Assert.AreEqual("7~-~3", "7 - 3".ToCzechNonBreakingSpacesString("~"));
+            Assert.AreEqual("7~–~3", "7 – 3".ToCzechNonBreakingSpacesString("~"));
+            Assert.AreEqual("foo~– bar", "foo – bar".ToCzechNonBreakingSpacesString("~"));
+            Assert.AreEqual("602~123~345", "602 123 345".ToCzechNonBreakingSpacesString("~"));
+        }
     }
 }
+

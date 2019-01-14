@@ -980,5 +980,44 @@ namespace Sushi2
 
             return text;
         }
+
+        /// <summary>
+        /// Get text with non-breaking spaces where needed.
+        /// </summary>
+        /// <param name="text">Input text.</param>
+        /// <param name="nbsp">Non-breaking space character.</param>
+        /// <returns>Text with non-breaking spaces where needed.</returns>
+        /// <remarks>Based on https://github.com/Mikulas/vlna</remarks>
+        public static string ToCzechNonBreakingSpacesString(this string text, string nbsp = "&nbsp;")
+        {
+            if (text == null)
+                throw new ArgumentNullException(nameof(text));
+
+            var prepositions = new Regex(@"\b(k|s|v|z|a|i|o|u|K|S|V|Z|A|I|O|U)(\s)");
+            text = prepositions.Replace(text, "$1" + nbsp);
+
+            var degrees = new Regex(@"(akad|Bc|BcA|CSc|doc|Dr|DrSc|DSc|ICDr|Ing|JUDr|MDDr|MgA|Mgr|MSDr|MUDr|MVDr|PaedDr|Ph\.D|PharmDr|PhDr|PhMr|prof|RCDr|RNDr|RSDr|RTDr|Th\.D|ThDr|ThLic|ThMgr|DiS)\.(\s)");
+            text = degrees.Replace(text, "$1." + nbsp);
+
+            var names = new Regex(@"(\p{Lu}\.)\s(\p{Lu})");
+            text = names.Replace(text, "$1" + nbsp + "$2");
+
+            var dears = new Regex(@"\b(\p{Ll}\.)\s(\p{Lu})");
+            text = dears.Replace(text, "$1" + nbsp + "$2");
+
+            var numbers = new Regex(@"(\d)\s");
+            text = numbers.Replace(text, "$1" + nbsp);
+
+            var numbersPlus = new Regex(@"(\w\.)\s(\d|\p{Ll})");
+            text = numbersPlus.Replace(text, "$1" + nbsp + "$2");
+
+            var hyphensAndDashes = new Regex(@"(\s)(-|–)");
+            text = hyphensAndDashes.Replace(text, nbsp + "$2");
+
+            var hyphensAndDashesPlus = new Regex(@"(-|–)\s(\d)");
+            text = hyphensAndDashesPlus.Replace(text, "$1" + nbsp + "$2");            
+
+            return text;
+        }
     }
 }
