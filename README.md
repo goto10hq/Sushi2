@@ -107,7 +107,7 @@ Returns normalized string usable for sorting operations for Czech language. Usab
 zbluau*ouad*kz* kuco*
 ```
 
-### string ToCzechNonBreakingSpacesString(this string text, string nbsp = "&nbsp;")
+### string ToCzechNonBreakingSpacesString(this string text, string nbsp = "\&nbsp;")
 
 Returns string with space replaced with a non-breaking space string.
 
