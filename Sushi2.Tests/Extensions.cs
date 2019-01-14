@@ -663,7 +663,7 @@ namespace Sushi2.Tests
         {
             Assert.AreEqual("Ferda a&nbsp;mravenec", "Ferda a mravenec".ToCzechNonBreakingSpacesString());
             Assert.AreEqual("Ferda a_mravenec", "Ferda a mravenec".ToCzechNonBreakingSpacesString("_"));
-            Assert.AreEqual("Dr.&nbsp;Ferda mravenec", "Dr. Ferda mravenec".ToCzechNonBreakingSpacesString());
+            Assert.AreEqual("Dr.&nbsp;Ferda Mravenec", "Dr. Ferda Mravenec".ToCzechNonBreakingSpacesString());
             Assert.AreEqual("F.&nbsp;Mravenec", "F. Mravenec".ToCzechNonBreakingSpacesString());
             Assert.AreEqual("p.&nbsp;Mravenec", "p. Mravenec".ToCzechNonBreakingSpacesString());
             Assert.AreEqual("30&nbsp;kg", "30 kg".ToCzechNonBreakingSpacesString());
@@ -684,6 +684,7 @@ namespace Sushi2.Tests
             Assert.AreEqual("7~–~3", "7 – 3".ToCzechNonBreakingSpacesString("~"));
             Assert.AreEqual("foo~– bar", "foo – bar".ToCzechNonBreakingSpacesString("~"));
             Assert.AreEqual("602~123~345", "602 123 345".ToCzechNonBreakingSpacesString("~"));
+            Assert.AreEqual("Dr.~Ferda mravenec má telefonní číslo 600~111~333.", "Dr. Ferda mravenec má telefonní číslo 600 111 333.".ToCzechNonBreakingSpacesString("~"));
         }
     }
 }
