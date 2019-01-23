@@ -28,7 +28,7 @@ namespace Sushi2
         /// First it tries to get a text field defined in Description.
         /// If it's not set then it returns value of enum itself.
         /// If nondefined value has code 0 and <paramref name="zeroValueName"/> is not null - exception is not being thrown and
-        /// instaed of it returns <paramref name="zeroValueName"/>.
+        /// instead of it returns <paramref name="zeroValueName"/>.
         /// </summary>
         /// <param name="field">Enum field.</param>
         /// <param name="zeroValueName">Zero value (used when non defined field is specified).</param>
@@ -51,11 +51,11 @@ namespace Sushi2
 
             FieldInfo fieldInfo = t.GetField(fieldName);
 
-            object[] attributies = fieldInfo.GetCustomAttributes(typeof(DescriptionAttribute), false);
+            object[] attributes = fieldInfo.GetCustomAttributes(typeof(DescriptionAttribute), false);
 
-            if (attributies.GetLength(0) >= 1)
+            if (attributes.GetLength(0) >= 1)
             {
-                DescriptionAttribute da = (DescriptionAttribute)attributies[0];
+                DescriptionAttribute da = (DescriptionAttribute)attributes[0];
                 return da.Description;
             }
 
