@@ -509,6 +509,22 @@ namespace Sushi2.Tests
         }
 
         [TestMethod]
+        public void EnumToolsGetNext()
+        {
+            Assert.AreEqual(Robot.Two, EnumTools.GetNext(Robot.One));
+            Assert.AreEqual(Robot.Three, EnumTools.GetNext(Robot.Two));
+            Assert.AreEqual(Robot.One, EnumTools.GetNext(Robot.Three));
+        }
+
+        [TestMethod]
+        public void EnumToolsGetPrevious()
+        {
+            Assert.AreEqual(Robot.Three, EnumTools.GetPrevious(Robot.One));
+            Assert.AreEqual(Robot.One, EnumTools.GetPrevious(Robot.Two));
+            Assert.AreEqual(Robot.Two, EnumTools.GetPrevious(Robot.Three));
+        }
+
+        [TestMethod]
         public void ToSlug()
         {
             Assert.AreEqual("aaa", "aaa".ToSlug());
@@ -717,7 +733,7 @@ namespace Sushi2.Tests
             //Assert.AreEqual("Fr.~Daneš", "Fr. Daneš".ToCzechNonBreakingSpacesString("~"));
             Assert.AreEqual("František Daneš", "František Daneš".ToCzechNonBreakingSpacesString("~"));
 
-            
+
         }
     }
 }

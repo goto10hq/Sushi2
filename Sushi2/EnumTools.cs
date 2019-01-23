@@ -28,7 +28,7 @@ namespace Sushi2
         /// First it tries to get a text field defined in Description.
         /// If it's not set then it returns value of enum itself.
         /// If nondefined value has code 0 and <paramref name="zeroValueName"/> is not null - exception is not being thrown and
-        /// insed of it returns <paramref name="zeroValueName"/>.
+        /// instaed of it returns <paramref name="zeroValueName"/>.
         /// </summary>
         /// <param name="field">Enum field.</param>
         /// <param name="zeroValueName">Zero value (used when non defined field is specified).</param>
@@ -72,7 +72,7 @@ namespace Sushi2
         public static T Parse<T>(object value, T defaultValue) where T : struct, IConvertible
         {
             if (!typeof(T).IsEnum)
-                throw new ArgumentException("T must be an enumerated type.");
+                new ArgumentException(string.Format("Argument {0} is not an Enum", typeof(T).FullName));
 
             if (value == null)
                 return defaultValue;
@@ -99,7 +99,7 @@ namespace Sushi2
         public static T? Parse<T>(object value) where T : struct
         {
             if (!typeof(T).IsEnum)
-                throw new ArgumentException("T must be an enumerated type.");
+                new ArgumentException(string.Format("Argument {0} is not an Enum", typeof(T).FullName));
 
             if (value == null)
                 return null;
@@ -115,6 +115,38 @@ namespace Sushi2
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// Get next item in enum.
+        /// </summary>
+        /// <typeparam name="T">Type.</typeparam>
+        /// <param name="value">Value.</param>
+        /// <return>Next enum value or first if there's no next item.</return>
+        public static T GetNext<T>(T value) where T : struct
+        {
+            if (!typeof(T).IsEnum) throw
+                new ArgumentException(string.Format("Argument {0} is not an Enum", typeof(T).FullName));
+
+            T[] array = (T[])Enum.GetValues(value.GetType());
+            var j = Array.IndexOf<T>(array, value) + 1;
+            return (array.Length == j) ? array[0] : array[j];
+        }
+
+        /// <summary>
+        /// Get previous item in enum.
+        /// </summary>
+        /// <typeparam name="T">Type.</typeparam>
+        /// <param name="value">Value.</param>
+        /// <return>Previous enum value or last if there's no previous item.</return>
+        public static T GetPrevious<T>(T value) where T : struct
+        {
+            if (!typeof(T).IsEnum) throw
+                new ArgumentException(string.Format("Argument {0} is not an Enum", typeof(T).FullName));
+
+            T[] array = (T[])Enum.GetValues(value.GetType());
+            var j = Array.IndexOf<T>(array, value) - 1;
+            return (j < 0) ? array[array.Length - 1] : array[j];
         }
     }
 }
