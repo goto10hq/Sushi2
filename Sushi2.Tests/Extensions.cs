@@ -26,6 +26,12 @@ namespace Sushi2.Tests
         }
 
         [TestMethod]
+        public void ToCzechSortedStringWeirdChars()
+        {
+            Assert.AreEqual(",,someaething#* .* eaetc. night or e*b*y", "„something“ – etc. night or ďáy".ToCzechSortedString());
+        }
+        
+        [TestMethod]
         public void ToCzechSortedString()
         {
             var texts = new List<string>
@@ -63,7 +69,7 @@ namespace Sushi2.Tests
                             "Zluťoučký kúň",
                             "Chobot",
                             "CHOBOT",
-                            "Joker´s bar"
+                            "Joker´s bar"                            
                         };
 
             var sorted = texts.Select(x => x).OrderBy(x => x.ToCzechSortedString(), StringComparer.Create(Sushi2.Cultures.English, false)).ToList();

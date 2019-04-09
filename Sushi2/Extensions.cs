@@ -98,8 +98,15 @@ namespace Sushi2
                             if (string.IsNullOrEmpty(norm))
                                 break;
 
-                            result += (char)(Convert.ToChar(norm, Cultures.Czech) + 1);
-                            result += "*";
+                            if (norm.Length != 1)
+                            {
+                                result += norm;
+                            }
+                            else
+                            {
+                                result += (char)(Convert.ToChar(norm, Cultures.Czech) + 1);
+                                result += "*";
+                            }
                             break;
                     }
                 }
