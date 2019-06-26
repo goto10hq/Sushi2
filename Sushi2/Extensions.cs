@@ -1000,28 +1000,28 @@ namespace Sushi2
             if (text == null)
                 throw new ArgumentNullException(nameof(text));
 
-            var prepositions = new Regex(@"\b(k|s|v|z|a|i|o|u|K|S|V|Z|A|I|O|U)(\s)");
+            var prepositions = new Regex(@"\b(k|s|v|z|a|i|o|u|K|S|V|Z|A|I|O|U)( )");
             text = prepositions.Replace(text, "$1" + nbsp);
 
-            var degrees = new Regex(@"(akad|Bc|BcA|CSc|doc|Dr|DrSc|DSc|ICDr|Ing|JUDr|MDDr|MgA|Mgr|MSDr|MUDr|MVDr|PaedDr|Ph\.D|PharmDr|PhDr|PhMr|prof|RCDr|RNDr|RSDr|RTDr|Th\.D|ThDr|ThLic|ThMgr|DiS)\.(\s)");
+            var degrees = new Regex(@"(akad|Bc|BcA|CSc|doc|Dr|DrSc|DSc|ICDr|Ing|JUDr|MDDr|MgA|Mgr|MSDr|MUDr|MVDr|PaedDr|Ph\.D|PharmDr|PhDr|PhMr|prof|RCDr|RNDr|RSDr|RTDr|Th\.D|ThDr|ThLic|ThMgr|DiS)\.( )");
             text = degrees.Replace(text, "$1." + nbsp);
 
-            var names = new Regex(@"(\p{Lu}\.)\s(\p{Lu})");
+            var names = new Regex(@"(\p{Lu}\.) (\p{Lu})");
             text = names.Replace(text, "$1" + nbsp + "$2");
 
-            var dears = new Regex(@"\b(\p{Ll}\.)\s(\p{Lu})");
+            var dears = new Regex(@"\b(\p{Ll}\.) (\p{Lu})");
             text = dears.Replace(text, "$1" + nbsp + "$2");
 
-            var numbers = new Regex(@"(\d)\s");
+            var numbers = new Regex(@"(\d) ");
             text = numbers.Replace(text, "$1" + nbsp);
 
-            var numbersPlus = new Regex(@"(\w\.)\s(\d|\p{Ll})");
+            var numbersPlus = new Regex(@"(\w\.) (\d|\p{Ll})");
             text = numbersPlus.Replace(text, "$1" + nbsp + "$2");
 
-            var hyphensAndDashes = new Regex(@"(\s)(-|–)");
+            var hyphensAndDashes = new Regex(@"( )(-|–)");
             text = hyphensAndDashes.Replace(text, nbsp + "$2");
 
-            var hyphensAndDashesPlus = new Regex(@"(-|–)\s(\d)");
+            var hyphensAndDashesPlus = new Regex(@"(-|–) (\d)");
             text = hyphensAndDashesPlus.Replace(text, "$1" + nbsp + "$2");            
 
             return text;

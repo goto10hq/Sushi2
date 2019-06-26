@@ -30,7 +30,7 @@ namespace Sushi2.Tests
         {
             Assert.AreEqual(",,someaething#* .* eaetc. night or e*b*y", "„something“ – etc. night or ďáy".ToCzechSortedString());
         }
-        
+
         [TestMethod]
         public void ToCzechSortedString()
         {
@@ -69,7 +69,7 @@ namespace Sushi2.Tests
                             "Zluťoučký kúň",
                             "Chobot",
                             "CHOBOT",
-                            "Joker´s bar"                            
+                            "Joker´s bar"
                         };
 
             var sorted = texts.Select(x => x).OrderBy(x => x.ToCzechSortedString(), StringComparer.Create(Sushi2.Cultures.English, false)).ToList();
@@ -738,8 +738,8 @@ namespace Sushi2.Tests
             Assert.AreEqual("tzv.~klikání", "tzv. klikání".ToCzechNonBreakingSpacesString("~"));
             //Assert.AreEqual("Fr.~Daneš", "Fr. Daneš".ToCzechNonBreakingSpacesString("~"));
             Assert.AreEqual("František Daneš", "František Daneš".ToCzechNonBreakingSpacesString("~"));
-
-
+            Assert.AreEqual("- well\r\n- oh oh", "- well\r\n- oh oh".ToCzechNonBreakingSpacesString("_"));
+            Assert.AreEqual("100_-_200", "100 - 200".ToCzechNonBreakingSpacesString("_"));
         }
     }
 }
